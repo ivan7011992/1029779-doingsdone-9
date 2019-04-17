@@ -43,6 +43,15 @@ $show_tasks= [
     ]
 ];
 
+function count_task (array $show_tasks, $show_complete_tasks ){
+   $counter='0';
+   foreach ($show_tasks as $key => $item){
+       if ($show_complete_tasks === $item['category']){
+        $counter++;
+    }}
+    return $counter;} 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -83,11 +92,15 @@ $show_tasks= [
                 <h2 class="content__side-heading">Проекты</h2>
 
                 <nav class="main-navigation">
-                    <?php foreach($show_my_categories as $key => $item):?>
+                    <?php
+                     foreach($show_my_categories as $key => $item):?>
+                    <?php 
+                     $call = count_task ($show_tasks, $item );
+                      ?>
                     <ul class="main-navigation__list">
                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="#"><?= $item;?> </a>
-                            <span class="main-navigation__list-item-count">0</span>
+                            <span class="main-navigation__list-item-count"> <?= $call;?></span>
                         </li>
                         <?php endforeach;?>
                     </ul>
