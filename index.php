@@ -51,7 +51,7 @@ function count_task(array $tasks, string $category)
             $counter++;
         }
     }
-
+    
     return $counter;
 }
 
@@ -98,15 +98,15 @@ function count_task(array $tasks, string $category)
                 <nav class="main-navigation">
 
                     <ul class="main-navigation__list">
-                        <?php foreach ($categories as $key => $category): ?>
-                            <?php $count = count_task($tasks, $category) ?>
-                            <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link" href="#"><?= $category ?></a>
-                                <span class="main-navigation__list-item-count"><?= $count ?></span>
-                            </li>
-                        <?php endforeach ?>
+                    <?php foreach ($categories as $key => $category): ?>
+                        <?php $count = count_task($tasks, $category) ?>
+                        <li class="main-navigation__list-item">
+                            <a class="main-navigation__list-item-link" href="#"><?= $category ?></a>
+                            <span class="main-navigation__list-item-count"><?= $count ?></span>
+                        </li>
+                    <?php endforeach ?>
                     </ul>
-
+                  
                 </nav>
 
                 <a class="button button--transparent button--plus content__side-button"
