@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -41,17 +40,15 @@
                 <nav class="main-navigation">
 
                     <ul class="main-navigation__list">
-                        <?php foreach ($categories as $key => $category): ?>
+                        <?php foreach ($categories as $category): ?>
                             <?php $count = count_task($tasks, $category) ?>
                             <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link" href="#"><?= esc($category ) ?></a>
+                                <a class="main-navigation__list-item-link" href="#"><?=  esc($category) ?></a>
                                 <span class="main-navigation__list-item-count"><?= $count ?></span>
                             </li>
                         <?php endforeach ?>
                     </ul>
-
                 </nav>
-
                 <a class="button button--transparent button--plus content__side-button"
                    href="pages/form-project.html" target="project_add">Добавить проект</a>
             </section>
@@ -126,4 +123,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-<?php echo '123'; ?>
