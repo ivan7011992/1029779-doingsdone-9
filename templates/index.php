@@ -35,7 +35,6 @@
                         <span class="checkbox__text"><?= esc($task['task']) ?></span>
                     </label>
                 </td>
-
                 <td class="task__file">
                     <a class="download-link" href="#">Home.psd</a>
                 </td>
