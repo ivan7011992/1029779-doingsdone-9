@@ -27,5 +27,5 @@ function checkdata($date)
 function esc($str)
 {
     $text = htmlspecialchars($str);
-    echo $text;
+    return $text;
 }

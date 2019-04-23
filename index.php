@@ -1,4 +1,5 @@
 <?php
+
 require_once ('helpers.php');
 require_once ('functions.php');
 
@@ -43,9 +44,7 @@ require_once ('functions.php');
     ]
 ];
 $categories = ['Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто'];
-
 $show_complete_tasks = rand(0, 1);
-
 $page_content= include_template('index.php',['tasks' => $tasks,
                                                    'show_complete_tasks' => $show_complete_tasks
 ]);
