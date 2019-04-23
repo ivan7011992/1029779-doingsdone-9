@@ -55,4 +55,4 @@ $layout_content= include_template('layout.php', [ 'content' => $page_content,
                                                         'title' => 'Иван Васильев'
 ]);
 
-echo($layout_content);
+echo $layout_content;

@@ -1,17 +1,19 @@
 <?php
+
 function count_task(array $tasks, string $category)
 {
-$counter = 0;
-foreach ($tasks as $key => $item) {
-if ($category === $item['category']) {
-$counter++;
-}
+    $counter = 0;
+    foreach ($tasks as $key => $item) {
+        if ($category === $item['category']) {
+            $counter++;
+        }
+    }
+
+    return $counter;
 }
 
-return $counter;
-}
-
-function checkdata($date){
+function checkdata($date)
+{
     $date_task= strtotime( $date);
     $date_difference= $date_task-time();
     $hours= floor ($date_difference/3600);
@@ -19,10 +21,11 @@ function checkdata($date){
         $class_on = 'task--important';
     }
 
-return $class_on;
+    return $class_on;
 }
 
-function esc($str) {
+function esc($str)
+{
     $text = htmlspecialchars($str);
     echo $text;
 }
