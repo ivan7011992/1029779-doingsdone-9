@@ -1,14 +1,12 @@
 <?php
+
 require_once ('helpers.php');
-function esc($str) {
-    $text = htmlspecialchars($str);
-    return $text;
-}
+require_once ('functions.php');
 
  $tasks = [
     [
         'task' => 'Собеседование в IT-компании',
-        'date' => '01.12.18',
+        'date' => '01.12.2019',
         'category' => 'Работа',
         'complete' => 'Нет'
     ],
@@ -20,7 +18,7 @@ function esc($str) {
     ],
     [
         'task' => 'Сделать задание первого раздела',
-        'date' => '21.12.2018',
+        'date' => '21.12.2019',
         'category' => 'Учеба',
         'complete' => 'Да'
     ],
@@ -46,19 +44,14 @@ function esc($str) {
     ]
 ];
 $categories = ['Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто'];
-
 $show_complete_tasks = rand(0, 1);
-
 $page_content= include_template('index.php',['tasks' => $tasks,
                                                    'show_complete_tasks' => $show_complete_tasks
 ]);
-
 $layout_content= include_template('layout.php', [ 'content' => $page_content,
                                                         'tasks' => $tasks,
                                                         'categories' => $categories,
                                                         'title' => 'Иван Васильев'
 ]);
 
-
-
-print($layout_content);
+echo $layout_content;

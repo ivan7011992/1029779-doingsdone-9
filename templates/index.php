@@ -1,8 +1,3 @@
-<?php
-// показывать или нет выполненные задачи
-$show_complete_tasks = rand(0, 1);
-?>
-
 
 <h2 class="content__main-heading">Список задач</h2>
 
@@ -24,29 +19,32 @@ $show_complete_tasks = rand(0, 1);
 
         <!--добавить сюда аттрибут "checked", если переменная $show_complete_tasks равна единице-->
         <input class="checkbox__input visually-hidden show_completed"
-               type="checkbox" <?php if ($show_complete_tasks == 1): ?> checked <?php endif ?> >
+               type="checkbox" <?php if ($show_complete_tasks === 1): ?> checked <?php endif ?> >
         <span class="checkbox__text">Показывать выполненные</span>
     </label>
 </div>
 
 <table class="tasks">
-    <?php foreach ($tasks as $key => $task): ?>
-        <?php if ($task['complete'] == 'Нет'): ?>
-            <tr class="tasks__item task">
-                <td class="task__select">
-                    <label class="checkbox task__checkbox">
-                        <input class="checkbox__input visually-hidden task__checkbox" type="checkbox"
-                               value="1">
-                        <span class="checkbox__text"><?= esc($task['task']) ?></span>
-                    </label>
-                </td>
-
-                <td class="task__file">
-                    <a class="download-link" href="#">Home.psd</a>
-                </td>
-                <td class="task__date"><?= $task['date'] ?></td>
-            </tr>
-        <?php elseif ($task['complete'] == 'Да' && $show_complete_tasks == 1): ?>
+    <?php foreach ($tasks as $task): ?>
+        <?php if ($task['complete'] === 'Нет'): ?>
+            <?php if (check_date($task['date'])): ?>
+                <tr class="tasks__item task" >
+            <?php else: ?>
+                <tr class="tasks__item task  task--important">
+            <?php endif ?>
+                    <td class="task__select">
+                         <label class="checkbox task__checkbox">
+                            <input class="checkbox__input visually-hidden task__checkbox" type="checkbox"
+                           value="1">
+                            <span class="checkbox__text"><?= esc($task['task']) ?></span>
+                        </label>
+                    </td>
+                    <td class="task__file">
+                         <a class="download-link" href="#">Home.psd</a>
+                    </td>
+                     <td class="task__date"><?= $task['date'] ?></td>
+                </tr>
+        <?php elseif ($task['complete'] === 'Да' && $show_complete_tasks === 1): ?>
             <tr class="tasks__item task task--completed">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
