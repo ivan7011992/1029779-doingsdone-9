@@ -1,11 +1,11 @@
 <?php
 
 /**
+ *
  * Количество задач для категории.
  * @param array $tasks Задачи
  * @param string $category Список категорий
  * @return int */
-
 function count_task(array $tasks, string $category): int
 {
     $counter = 0;
@@ -20,7 +20,7 @@ function count_task(array $tasks, string $category): int
 
 /**
  * Проверить,осталось меньше 24 часов до даты.
- * @param $date Дата в виде строки
+ * @param $date  string Дата в виде строки
  * @return bool
  */
 function check_date(string $date): bool
@@ -39,7 +39,7 @@ function check_date(string $date): bool
  * @param $str Принимает строку
  * @return  string
  */
-function esc( string $str):string
+function esc(string $str):string
 {
     $text = htmlspecialchars($str);
     echo $text;
