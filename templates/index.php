@@ -27,7 +27,7 @@
 <table class="tasks">
     <?php foreach ($tasks as $task): ?>
         <?php if ($task['complete'] === 'Нет'): ?>
-            <?php if (check_date($task['date'])): ?>
+            <?php if (check_date($task['date_start'])): ?>
                 <tr class="tasks__item task" >
             <?php else: ?>
                 <tr class="tasks__item task  task--important">
@@ -42,7 +42,7 @@
                     <td class="task__file">
                          <a class="download-link" href="#">Home.psd</a>
                     </td>
-                     <td class="task__date"><?= $task['date'] ?></td>
+                     <td class="task__date"><?= $task['date_start'] ?></td>
                 </tr>
         <?php elseif ($task['complete'] === 'Да' && $show_complete_tasks === 1): ?>
             <tr class="tasks__item task task--completed">
@@ -52,7 +52,7 @@
                         <span class="checkbox__text"><?= $task['task'] ?></span>
                     </label>
                 </td>
-                <td class="task__date"><?= $task['date'] ?></td>
+                <td class="task__date"><?= $task['date_start'] ?></td>
                 <td class="task__controls"></td>
             </tr>
         <?php endif ?>

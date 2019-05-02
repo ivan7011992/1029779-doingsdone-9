@@ -1,46 +1,45 @@
 
-
-Use things;
-	Drop table if exists  project;
-	Drop table if exists  task;
-	Drop table if exists users;
+USE things;
+	DROP TABLE if EXISTS  project;
+	DROP TABLE if EXISTS  task;
+	DROP TABLE if EXISTS users;
  
-Create table project (
-	id int auto_increment primary key,
-	Name_Project varchar (200)
+CREATE TABLE project (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	name_Project VARCHAR (200)
 );
-Insert Into project (Name_Project)
-Values ('Входящие'),  ('Учеба'),  ('Работа'),  ('Домашние дела'),  ('Авто');
+INSERT INTO project (name_project)
+VALUES ('Входящие'),  ('Учеба'),  ('Работа'),  ('Домашние дела'),  ('Авто');
 
-Create table task(
-	id int auto_increment primary key,
-	Project_id int(10), 
-	User_id int(100),
-	Name_Task varchar (200),
-	Dowloads varchar(100),
-	Data_start date,  
-	Status_task int(10),
-	Date_term date
+CREATE TABLE task(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	project_id int(10),
+	user_id int(100),
+	name_task varchar(200),
+	dowloads varchar(100),
+	date_start date,
+	status_task int(10),
+	date_term date
 );
 
-Insert Into task (Project_id, User_id, Name_Task, Dowloads, Data_start, Status_task, Date_term )
-Values ('3', '1', 'Собеседование в IT-компании', 'Home.psd', '2019-01-01', '0', '2019-12-01'),
+INSERT INTO task (project_id, user_id, name_task, dowloads, date_start, status_task, date_term )
+VALUES ('3', '1', 'Собеседование в IT-компании', 'Home.psd', '2019-01-01', '0', '2019-12-01'),
 	   ('3', '2', 'Выполнить тестовое задание', 'Home.psd', '2019-01-01', '0', '2018-12-25'),
        ('2', '3', 'Сделать задание первого раздела','Home.psd', '2019-01-01', '1', '2019-12-21'),
        ('1', '4', 'Встреча с другом', 'Home.psd', '2019-01-01', '0', '2018-12-22'),
        ('4', '5', 'Купить корм для кота', 'Home.psd', '2019-01-01', '0', null),
        ('4', '6', 'Заказать пиццу', 'Home.psd', '2019-01-01', '0', null);
 
-Create table users(
-	id int auto_increment primary key,
-	user_name varchar(100),
-	Data_regist date,
-	email varchar(100),
-	password_user varchar (100)
+CREATE TABLE users(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	user_name VARCHAR(100),
+	date_regist DATE,
+	email VARCHAR(100),
+	password_user VARCHAR(100)
 );
 
-Insert Into users (user_name, Data_regist, email, password_user)
-Values 	('Иван', '2019-01-01', 'ivan@mail.ru', '123456'),
+INSERT INTO users (user_name, date_regist, email, password_user)
+VALUES 	('Иван', '2019-01-01', 'ivan@mail.ru', '123456'),
 		('Алексей', '2019-01-02', 'alex@mail.ru', '123456'),
 		('Степан', '2019-01-03', 'step@mail.ru', '123456'),
 		('Сергей', '2019-01-04', 'serg@mail.ru', '123456'),

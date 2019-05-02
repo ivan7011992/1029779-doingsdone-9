@@ -5,7 +5,8 @@
  * Количество задач для категории.
  * @param array $tasks Задачи
  * @param string $category Список категорий
- * @return int */
+ * @return int
+ */
 function count_task(array $tasks, string $category): int
 {
     $counter = 0;
@@ -39,7 +40,7 @@ function check_date(string $date): bool
  * @param $str Принимает строку
  * @return  string
  */
-function esc(string $str):string
+function esc (string $str)
 {
     $text = htmlspecialchars($str);
     echo $text;
