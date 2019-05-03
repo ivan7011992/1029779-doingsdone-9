@@ -19,15 +19,15 @@ if ($con == false) {
 
 mysqli_set_charset($con, "utf8");
 //mysqli_options ($con,MYSQLI_OPT_INT_AND_FLOAT_NATIVE,1);
-$sql = "SELECT name_task as task,date_start, status_task as complete  FROM task";
+$sql = "SELECT name_task AS task,date_start, status_task AS complete  FROM task";
 
-$result1 = mysqli_query($con, $sql);
+$result = mysqli_query($con, $sql);
 
-if (!$result1) {
+if (!$result) {
     $error = mysqli_error($con);
     print ("Ошибка MySQL:" . $error);
 }  else {
-    $tasks = mysqli_fetch_all($result1, MYSQLI_ASSOC);
+    $tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 
 }
@@ -58,16 +58,17 @@ mysqli_set_charset($con, "utf8");
 
 $sql = "SELECT name_project AS category FROM project ";
 
-$result2 = mysqli_query($con, $sql);
-if (!$result2) {
+$result = mysqli_query($con, $sql);
+if (!$result) {
     $error = mysqli_error($con);
     print ("Ошибка MySQL:" . $error);
 } else {
 
-    $categories = mysqli_fetch_all($result2, MYSQLI_ASSOC);
+    $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 }
 var_dump($categories);
+
 
 
 $page_content = include_template('index.php', ['tasks' => $tasks,
