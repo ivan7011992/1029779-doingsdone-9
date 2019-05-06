@@ -1,6 +1,5 @@
 <?php
 
-
 require_once('helpers.php');
 require_once('functions.php');
 
@@ -19,7 +18,7 @@ if ($con == false) {
 
 mysqli_set_charset($con, "utf8");
 //mysqli_options ($con,MYSQLI_OPT_INT_AND_FLOAT_NATIVE,1);
-$sql = "SELECT name_task AS task,date_start, status_task AS complete  FROM task";
+$sql = "SELECT name_task AS task, date_start, status_task AS complete  FROM task";
 
 $result = mysqli_query($con, $sql);
 
@@ -66,6 +65,7 @@ if (!$result) {
 
     $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
+
 }
 var_dump($categories);
 
@@ -78,7 +78,7 @@ print (include_template('layout.php', [' categories' => $categories,
                                              'show_complete_tasks' => $show_complete_tasks,
                                              'title' => 'Иван Васильев',
                                              'content' => $page_content,
-                                             'tasks' => $tasks
+                                              'tasks' => $tasks
 
 ]));
 

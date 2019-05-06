@@ -27,7 +27,7 @@ FROM project p
 JOIN task t ON t.project_id = p.id
 JOIN users u ON t.user_id = u.id
 WHERE u.user_name = 'Иван'
-GROUP BY p.name_project,u.user_name
+GROUP BY p.name_project,u.user_name;
 
 /*
 получить список из всех задач для одного проекта.
@@ -35,15 +35,15 @@ GROUP BY p.name_project,u.user_name
 SELECT p.name_project, name_task FROM task t
 JOIN project p
 ON p.id= t.project_id
-WHERE name_project = 'Работа'
+WHERE name_project = 'Работа';
 
 /*
 Пометить задачу как выполненную.
 */
-UPDATE task SET status_task = '1' WHERE id = '1'
-SELECT * FROM task
+UPDATE task SET status_task = '1' WHERE id = '1';
+SELECT * FROM task;
 
  /*
 Пометить задачу как выполненную.
 */ 
-UPDATE task SET name_task  = 'Поехать на Алтай' WHERE id = '1'
+UPDATE task SET name_task  = 'Поехать на Алтай' WHERE id = '1';
