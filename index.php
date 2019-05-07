@@ -56,13 +56,13 @@ mysqli_set_charset($con, "utf8");
 
 $sql = "SELECT name_project  FROM project ";
 
-$result = mysqli_query($con, $sql);
-if (!$result) {
+$result2 = mysqli_query($con, $sql);
+if (!$result2) {
     $error = mysqli_error($con);
     print ("Ошибка MySQL:" . $error);
 } else {
 
-    $resalts = mysqli_fetch_all($result);
+    $resalts = mysqli_fetch_all($result2);
     $categories = [];
 
 }
