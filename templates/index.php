@@ -1,4 +1,3 @@
-
 <h2 class="content__main-heading">Список задач</h2>
 
 <form class="search-form" action="index.php" method="post" autocomplete="off">
@@ -27,23 +26,23 @@
 <table class="tasks">
     <?php foreach ($tasks as $task): ?>
         <?php if ($task['complete'] === 'Нет'): ?>
-            <?php if (check_date($task['date'])): ?>
+            <?php if (check_date($task['date_start'])): ?>
                 <tr class="tasks__item task" >
             <?php else: ?>
                 <tr class="tasks__item task  task--important">
             <?php endif ?>
-                    <td class="task__select">
-                         <label class="checkbox task__checkbox">
-                            <input class="checkbox__input visually-hidden task__checkbox" type="checkbox"
+            <td class="task__select">
+                <label class="checkbox task__checkbox">
+                    <input class="checkbox__input visually-hidden task__checkbox" type="checkbox"
                            value="1">
-                            <span class="checkbox__text"><?= esc($task['task']) ?></span>
-                        </label>
-                    </td>
-                    <td class="task__file">
-                         <a class="download-link" href="#">Home.psd</a>
-                    </td>
-                     <td class="task__date"><?= $task['date'] ?></td>
-                </tr>
+                    <span class="checkbox__text"><?= esc($task['task']) ?></span>
+                </label>
+            </td>
+            <td class="task__file">
+                <a class="download-link" href="#">Home.psd</a>
+            </td>
+            <td class="task__date"><?= $task['date_start'] ?></td>
+            </tr>
         <?php elseif ($task['complete'] === 'Да' && $show_complete_tasks === 1): ?>
             <tr class="tasks__item task task--completed">
                 <td class="task__select">
@@ -52,7 +51,7 @@
                         <span class="checkbox__text"><?= $task['task'] ?></span>
                     </label>
                 </td>
-                <td class="task__date"><?= $task['date'] ?></td>
+                <td class="task__date"><?= $task['date_start'] ?></td>
                 <td class="task__controls"></td>
             </tr>
         <?php endif ?>
