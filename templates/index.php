@@ -25,7 +25,7 @@
 
 <table class="tasks">
     <?php foreach ($tasks as $task): ?>
-        <?php if ($task['complete'] === 'Нет'): ?>
+        <?php if ($task['completed'] === '0'): ?>
             <?php if (check_date($task['date_start'])): ?>
                 <tr class="tasks__item task" >
             <?php else: ?>
@@ -35,7 +35,7 @@
                 <label class="checkbox task__checkbox">
                     <input class="checkbox__input visually-hidden task__checkbox" type="checkbox"
                            value="1">
-                    <span class="checkbox__text"><?= esc($task['task']) ?></span>
+                    <span class="checkbox__text"><?= esc($task['name']) ?></span>
                 </label>
             </td>
             <td class="task__file">
@@ -43,12 +43,12 @@
             </td>
             <td class="task__date"><?= $task['date_start'] ?></td>
             </tr>
-        <?php elseif ($task['complete'] === 'Да' && $show_complete_tasks === 1): ?>
+        <?php elseif ($task['completed'] === '1' && $show_complete_tasks === 1): ?>
             <tr class="tasks__item task task--completed">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
                         <input class="checkbox__input visually-hidden" type="checkbox" checked>
-                        <span class="checkbox__text"><?= $task['task'] ?></span>
+                        <span class="checkbox__text"><?= $task['name'] ?></span>
                     </label>
                 </td>
                 <td class="task__date"><?= $task['date_start'] ?></td>

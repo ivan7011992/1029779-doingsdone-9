@@ -39,11 +39,14 @@
                 <nav class="main-navigation">
 
                     <ul class="main-navigation__list">
-                        <?php foreach ($categories as $category): ?>
-                            <?php $count = count_task($tasks, $category) ?>
+
+                        <?php
+                        foreach ($project as $category): ?>
                             <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link" href="#"><?=  esc($category) ?></a>
-                                <span class="main-navigation__list-item-count"><?= $count ?></span>
+                                <a class="main-navigation__list-item-link
+                                <?php if ($projectId === (int) $category['id']): ?>main-navigation__list-item--active <?php endif ?>"
+                                   href="?project_id=<?= $category['id'] ?>"><?= esc($category['name']) ?></a>
+                                <span class="main-navigation__list-item-count"><?= $projectTaskCount[$category['id']] ?></span>
                             </li>
                         <?php endforeach ?>
                     </ul>
