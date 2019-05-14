@@ -1,11 +1,16 @@
+<?php
+/** @var array $projects */
+/** @var array $errors */
+?>
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
-    <title><?= $title ?></title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/flatpickr.min.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/flatpickr.min.css">
 </head>
 
 <body>
@@ -14,13 +19,12 @@
 <div class="page-wrapper">
     <div class="container container--with-sidebar">
         <header class="main-header">
-            <a href="/">
-                <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
+            <a href="#">
+                <img src="../img/logo.png" width="153" height="42" alt="Логитип Дела в порядке">
             </a>
 
             <div class="main-header__side">
-                <a class="main-header__side-item button button--plus open-modal" href="pages/form-task.html">Добавить
-                    задачу</a>
+                <a class="main-header__side-item button button--plus" href="form-task.html">Добавить задачу</a>
 
                 <div class="main-header__side-item user-menu">
                     <div class="user-menu__data">
@@ -37,32 +41,104 @@
                 <h2 class="content__side-heading">Проекты</h2>
 
                 <nav class="main-navigation">
-
                     <ul class="main-navigation__list">
+                        <li class="main-navigation__list-item">
+                            <a class="main-navigation__list-item-link" href="#">Входящие</a>
+                            <span class="main-navigation__list-item-count">24</span>
+                        </li>
 
-                        <?php
-                        foreach ($project as $category): ?>
-                            <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link
-                                <?php if ($projectId === (int)$category['id']): ?>main-navigation__list-item--active <?php endif ?>"
-                                   href="?project_id=<?= $category['id'] ?>"><?= esc($category['name']) ?></a>
-                                <span class="main-navigation__list-item-count">
-                                    <?php if (array_key_exists($category['id'], $projectTaskCount)): ?>
-                                        <?= $projectTaskCount[$category['id']] ?>
-                                    <?php else: ?>
-                                        0
-                                    <?php endif ?>
-                                </span>
-                            </li>
-                        <?php endforeach ?>
+                        <li class="main-navigation__list-item main-navigation__list-item--active">
+                            <a class="main-navigation__list-item-link" href="#">Работа</a>
+                            <span class="main-navigation__list-item-count">12</span>
+                        </li>
+
+                        <li class="main-navigation__list-item">
+                            <a class="main-navigation__list-item-link" href="#">Здоровье</a>
+                            <span class="main-navigation__list-item-count">3</span>
+                        </li>
+
+                        <li class="main-navigation__list-item">
+                            <a class="main-navigation__list-item-link" href="#">Домашние дела</a>
+                            <span class="main-navigation__list-item-count">7</span>
+                        </li>
+
+                        <li class="main-navigation__list-item">
+                            <a class="main-navigation__list-item-link" href="#">Авто</a>
+                            <span class="main-navigation__list-item-count">0</span>
+                        </li>
                     </ul>
                 </nav>
-                <a class="button button--transparent button--plus content__side-button"
-                   href="pages/form-project.html" target="project_add">Добавить проект</a>
+
+                <a class="button button--transparent button--plus content__side-button" href="form-project.html">Добавить
+                    проект</a>
             </section>
 
-            <main class="content__main"><?= $content ?>
+            <main class="content__main">
+                <h2 class="content__main-heading">Добавление задачи</h2>
 
+                <form class="form" action="add.php" method="post" autocomplete="off">
+                    <div class="form__row">
+                        <label class="form__label" for="name">Название <sup>*</sup></label>
+
+                        <input class="form__input <?php if (array_key_exists('name', $errors)): ?> form__input--error <?php endif ?>"
+                               type="text" name="name" id="name"
+                               value="<?php if (!empty($form_data['name'])) echo $form_data['name'] ?>"
+                               placeholder="Введите название">
+                        <?php if (array_key_exists('name', $errors)) : ?>
+                            <p class="form__message">
+                                <?= $errors['name'] ?>
+                            </p>
+                        <?php endif ?>
+                    </div>
+
+                    <div class="form__row">
+                        <label class="form__label" for="project">Проект <sup>*</sup></label>
+
+                        <select class="form__input form__input--select
+                        <?php if (array_key_exists('project', $errors)): ?> form__input--error <?php endif ?>"
+                                name="project" id="project">
+                            <?php foreach ($projects as $project): ?>
+                                <option value="<?= $project['id'] ?>"><?= $project['name'] ?></option>
+                            <?php endforeach ?>
+                        </select>
+
+                        <?php if (array_key_exists('project', $errors)) : ?>
+                            <p class="form__message">
+                                <?= $errors['project'] ?>
+                            </p>
+                        <?php endif ?>
+                    </div>
+
+                    <div class="form__row">
+                        <label class="form__label" for="date">Дата выполнения</label>
+
+                        <input class="form__input form__input--date <?php if (array_key_exists('date', $errors)): ?> form__input--error <?php endif ?>"
+                               type="text" name="date" id="date" value=""
+                               placeholder="Введите дату в формате ГГГГ-ММ-ДД">
+
+                        <?php if (array_key_exists('date', $errors)) : ?>
+                            <p class="form__message">
+                                <?= $errors['date'] ?>
+                            </p>
+                        <?php endif ?>
+                    </div>
+
+                    <div class="form__row">
+                        <label class="form__label" for="file">Файл</label>
+
+                        <div class="form__input-file">
+                            <input class="visually-hidden" type="file" name="file" id="file" value="">
+
+                            <label class="button button--transparent" for="file">
+                                <span>Выберите файл</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form__row form__row--controls">
+                        <input class="button" type="submit" name="" value="Добавить">
+                    </div>
+                </form>
             </main>
         </div>
     </div>
@@ -76,7 +152,7 @@
             <p>Веб-приложение для удобного ведения списка дел.</p>
         </div>
 
-        <a class="main-footer__button button button--plus" href="pages/form-task.html">Добавить задачу</a>
+        <a class="main-footer__button button button--plus" href="form-task.html">Добавить задачу</a>
 
         <div class="main-footer__social social">
             <span class="visually-hidden">Мы в соцсетях:</span>
@@ -121,13 +197,12 @@
             <span class="visually-hidden">Разработано:</span>
 
             <a href="https://htmlacademy.ru/intensive/php">
-                <img src="img/htmlacademy.svg" alt="HTML Academy" width="118" height="40">
+                <img src="../img/htmlacademy.svg" alt="HTML Academy" width="118" height="40">
             </a>
         </div>
     </div>
 </footer>
-
-<script src="flatpickr.js"></script>
-<script src="script.js"></script>
+<script src="../flatpickr.js"></script>
+<script src="../script.js"></script>
 </body>
 </html>

@@ -1,4 +1,6 @@
 <?php
+// error_reporting(-1);
+
 require_once('init.php');
 require_once('db.php');
 $show_complete_tasks = rand(0, 1);
