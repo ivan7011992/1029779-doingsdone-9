@@ -8,7 +8,7 @@ CREATE TABLE projects (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR (200)
 );
-INSERT INTO project (name)
+INSERT INTO projects (name)
 VALUES ('Входящие'),  ('Учеба'),  ('Работа'),  ('Домашние дела'),  ('Авто');
 
 CREATE TABLE tasks (
@@ -22,7 +22,7 @@ CREATE TABLE tasks (
 	date_term DATE
 );
 
-INSERT INTO task (project_id, user_id, name, dowloads, date_start, completed , date_term )
+INSERT INTO tasks (project_id, user_id, name, dowloads, date_start, completed , date_term )
 VALUES ('3', '1', 'Собеседование в IT-компании', 'Home.psd', '2019-01-01', '0', '2019-12-01'),
 	   ('3', '2', 'Выполнить тестовое задание', 'Home.psd', '2019-01-01', '0', '2018-12-25'),
        ('2', '3', 'Сделать задание первого раздела','Home.psd', '2019-01-01', '1', '2019-12-21'),

@@ -1,16 +1,18 @@
 <?php
 
 /**
- * Количество задач для категории.
+ * Количество задач для данного проекта.
  * @param array $tasks Задачи
- * @param string $category Список категорий
+ * @param array $projectrow Список проектов
  * @return int
  */
-function count_task(array $tasks, string $category): int
+function count_task(array $tasks, array $projectrow): int
 {
     $counter = 0;
-    foreach ($tasks as $key => $item) {
-        if ($category === $item['name_project']) {
+    $project_id = $projectrow['id'];
+
+    foreach ($tasks as $task) {
+        if ($project_id === $task['project_id']) {
             $counter++;
         }
     }
@@ -44,3 +46,4 @@ function esc(string $str)
     $text = htmlspecialchars($str);
     return $text;
 }
+
