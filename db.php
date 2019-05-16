@@ -38,7 +38,7 @@ function getProjects($con)
  */
 function getTasks($con, $projectId = null)
 {
-    $sql = "SELECT name, date_start, completed, project_id  FROM tasks ";
+    $sql = "SELECT * FROM tasks ";
     if($projectId !== null) {
         $sql .= (' WHERE project_id = ' . $projectId);
     }

@@ -1,8 +1,16 @@
+<?php
+/**
+ * @var string $title
+ * @var array $projects
+ * @var array $projectTaskCount
+ * @var int projectId
+ */
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title><?= $title ?></title>
+    <title><?=$title?></title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/flatpickr.min.css">
@@ -19,7 +27,7 @@
             </a>
 
             <div class="main-header__side">
-                <a class="main-header__side-item button button--plus open-modal" href="pages/form-task.html">Добавить
+                <a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить
                     задачу</a>
 
                 <div class="main-header__side-item user-menu">
@@ -39,9 +47,8 @@
                 <nav class="main-navigation">
 
                     <ul class="main-navigation__list">
-
                         <?php
-                        foreach ($project as $category): ?>
+                        foreach ($projects as $category): ?>
                             <li class="main-navigation__list-item">
                                 <a class="main-navigation__list-item-link
                                 <?php if ($projectId === (int)$category['id']): ?>main-navigation__list-item--active <?php endif ?>"
@@ -61,8 +68,8 @@
                    href="pages/form-project.html" target="project_add">Добавить проект</a>
             </section>
 
-            <main class="content__main"><?= $content ?>
-
+            <main class="content__main">
+                <?= $content ?>
             </main>
         </div>
     </div>
@@ -76,7 +83,7 @@
             <p>Веб-приложение для удобного ведения списка дел.</p>
         </div>
 
-        <a class="main-footer__button button button--plus" href="pages/form-task.html">Добавить задачу</a>
+        <a class="main-footer__button button button--plus" href="add.php">Добавить задачу</a>
 
         <div class="main-footer__social social">
             <span class="visually-hidden">Мы в соцсетях:</span>

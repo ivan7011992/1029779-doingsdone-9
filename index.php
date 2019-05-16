@@ -25,18 +25,18 @@ if(!empty($_GET['project_id'])) {
 }
 
 
-$content = include_template('index.php', ['tasks' => $tasks,
-    'show_complete_tasks' => $show_complete_tasks]);
+$content = include_template('index.php', [
+    'tasks' => $tasks,
+    'show_complete_tasks' => $show_complete_tasks
+]);
 
 
 $layout = include_template('layout.php', [
-    'project' => $projects,
     'title' => 'Иван Васильев',
-    'content' => $content,
-    'tasks' => $tasks,
+    'projects' => $projects,
     'projectTaskCount' => $projectTaskCount,
-    'projectId' => $projectId
-
+    'projectId' => $projectId,
+    'content' => $content,
 ]);
 
 echo $layout;
