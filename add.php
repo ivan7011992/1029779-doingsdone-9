@@ -3,6 +3,7 @@
 require_once('init.php');
 require_once('db.php');
 
+
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -27,6 +28,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     }
+$name=$_POST['name'];
+$project_id=$_POST['project'];
+$date =$_POST['date'];
+     $sql = 'INSERT INTO tasks (project_id, user_id, name, dowloads, date_start , completed , date_term)
+              VALUES ($project_id,1,"$name",Home.psd,?,?,$date)';
+
+   header("'Location: http://localhost/index.php");
+
+
+
+
+
 
     //todo если нет ошибок, то сохранить новую задачу в БД и сделать редирект на index.php
     //todo получить список проектов и количество задач в проектах, выводить их в шаблоне

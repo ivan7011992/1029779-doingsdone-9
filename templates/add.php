@@ -1,6 +1,7 @@
 <?php
 /** @var array $projects */
 /** @var array $errors */
+var_dump($projects);
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -42,30 +43,13 @@
 
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
+                        <?php foreach ($projects as $project): ?>
                         <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#">Входящие</a>
+                            <a class="main-navigation__list-item-link" href="#"><?= $project['name'] ?></a>
                             <span class="main-navigation__list-item-count">24</span>
                         </li>
+                        <?php endforeach ?>
 
-                        <li class="main-navigation__list-item main-navigation__list-item--active">
-                            <a class="main-navigation__list-item-link" href="#">Работа</a>
-                            <span class="main-navigation__list-item-count">12</span>
-                        </li>
-
-                        <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#">Здоровье</a>
-                            <span class="main-navigation__list-item-count">3</span>
-                        </li>
-
-                        <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#">Домашние дела</a>
-                            <span class="main-navigation__list-item-count">7</span>
-                        </li>
-
-                        <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#">Авто</a>
-                            <span class="main-navigation__list-item-count">0</span>
-                        </li>
                     </ul>
                 </nav>
 
@@ -94,7 +78,7 @@
                     <div class="form__row">
                         <label class="form__label" for="project">Проект <sup>*</sup></label>
 
-                        <select class="form__input form__input--select
+                        <select name='project' class="form__input form__input--select
                         <?php if (array_key_exists('project', $errors)): ?> form__input--error <?php endif ?>"
                                 name="project" id="project">
                             <?php foreach ($projects as $project): ?>
