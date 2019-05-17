@@ -8,23 +8,23 @@ function checkErrors($con)
     $errors = [];
 
     if (empty($_POST['name'])) {
-        $errors['name'] = 'Название должно быть непусто';
+        $errors['name'] = 'РќР°Р·РІР°РЅРёРµ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РЅРµРїСѓСЃС‚Рѕ';
     }
 
     // if project with id exist
     if (!projectExists($con, $_POST['project'])) {
-        $errors['project'] = 'Проекта не существует';
+        $errors['project'] = 'РџСЂРѕРµРєС‚Р° РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚';
     }
 
     if (empty($_POST['date'])) {
-        $errors['date'] = 'Дата должна быть непустая';
+        $errors['date'] = 'Р”Р°С‚Р° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РЅРµРїСѓСЃС‚Р°СЏ';
     } else {
         if (!is_date_valid($_POST['date'])) {
-            $errors['date'] = 'Неверный формат даты';
+            $errors['date'] = 'РќРµРІРµСЂРЅС‹Р№ С„РѕСЂРјР°С‚ РґР°С‚С‹';
         } else {
             //todo
             if (strtotime($_POST['date']) < '') {
-                $errors['date'] = 'Дата должна быть больше или равна текущей';
+                $errors['date'] = 'Р”Р°С‚Р° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ Р±РѕР»СЊС€Рµ РёР»Рё СЂР°РІРЅР° С‚РµРєСѓС‰РµР№';
             }
         }
     }
@@ -75,7 +75,7 @@ $content = include_template('add.php', [
 
 
 $layout = include_template('layout.php', [
-    'title' => 'Иван Васильев',
+    'title' => 'РРІР°РЅ Р’Р°СЃРёР»СЊРµРІ',
     'projects' => $projects,
     'projectTaskCount' => $projectTaskCount,
     'projectId' => null,

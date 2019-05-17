@@ -8,11 +8,11 @@ $show_complete_tasks = rand(0, 1);
 $projectTaskCount = projectTaskCount($con);
 $projects = getProjects($con);
 
-$projectId= null;
-if(!empty($_GET['project_id'])) {
-    $projectId = (int) $_GET['project_id'];
-    if($projectId > 0) {
-        if(!projectExists($con, $projectId)) {
+$projectId = null;
+if (!empty($_GET['project_id'])) {
+    $projectId = (int)$_GET['project_id'];
+    if ($projectId > 0) {
+        if (!projectExists($con, $projectId)) {
             http_response_code(404);
             die();
         }

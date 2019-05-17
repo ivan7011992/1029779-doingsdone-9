@@ -33,13 +33,13 @@ function getProjects($con)
  *
  * Проверить на наличие задач и вывести их
  * @param $con Подключение к БД
- * @param int|null $projectId  Задача
+ * @param int|null $projectId Задача
  * @return array|null Массив задач
  */
 function getTasks($con, $projectId = null)
 {
     $sql = "SELECT * FROM tasks ";
-    if($projectId !== null) {
+    if ($projectId !== null) {
         $sql .= (' WHERE project_id = ' . $projectId);
     }
 
@@ -63,8 +63,8 @@ function getTasks($con, $projectId = null)
  * @param $projectId Идентификатор проета
  * @return bool Проект есть или нет
  */
-
-function projectExists($con, $projectId){
+function projectExists($con, $projectId)
+{
     $sql = 'SELECT COUNT(*) as projectsCount FROM projects WHERE id = ' . $projectId;
 
     $result = mysqli_query($con, $sql);
@@ -75,7 +75,7 @@ function projectExists($con, $projectId){
         die;
     }
 
-    $projectsCount = (int) mysqli_fetch_assoc($result)['projectsCount'];
+    $projectsCount = (int)mysqli_fetch_assoc($result)['projectsCount'];
 
     return $projectsCount > 0;
 }
@@ -86,10 +86,8 @@ function projectExists($con, $projectId){
  * @param $con
  * @return array|bool|mysqli_result Возращает массив с результатом выполнения запроса
  */
-
-
-
-function projectTaskCount($con) {
+function projectTaskCount($con)
+{
     $sql = "select project_id, COUNT(*) as tasksCount from tasks GROUP BY project_id;";
 
     $result = mysqli_query($con, $sql);
