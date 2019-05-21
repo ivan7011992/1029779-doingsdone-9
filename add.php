@@ -33,15 +33,18 @@ function checkErrors($con)
 }
 
 $errors = [];
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = checkErrors($con);
 
     if (count($errors) === 0) {
         $fileName = '';
-        if (isset($_FILES['file'])) {
+        if (isset($_FILES['file']['name'])) {
             $fileName = $_FILES['file']['name'];
             rename($_FILES['file']['tmp_name'], './uploads/' . $fileName);
-        }
+            var_dump($_FILES['file']['name']);
+         }
 
         $name = $_POST['name'];
         $project_id = $_POST['project'];
