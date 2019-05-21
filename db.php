@@ -1,9 +1,9 @@
 <?php
 /**
  *
- * Получить все проекты.
- * @param $con Подключение к БД
- * @return array Проекты
+ * РџРѕР»СѓС‡РёС‚СЊ РІСЃРµ РїСЂРѕРµРєС‚С‹.
+ * @param $con РџРѕРґРєР»СЋС‡РµРЅРёРµ Рє Р‘Р”
+ * @return array РџСЂРѕРµРєС‚С‹
  */
 function getProjects($con)
 {
@@ -12,7 +12,7 @@ function getProjects($con)
     $result = mysqli_query($con, $sql);
     if (!$result) {
         $error = mysqli_error($con);
-        echo "Ошибка MySQL:" . $error;
+        echo "РћС€РёР±РєР° MySQL:" . $error;
         die;
     } else {
         $results = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -31,10 +31,10 @@ function getProjects($con)
 
 /**
  *
- * Проверить на наличие задач и вывести их
- * @param $con Подключение к БД
- * @param int|null $projectId Задача
- * @return array|null Массив задач
+ * РџСЂРѕРІРµСЂРёС‚СЊ РЅР° РЅР°Р»РёС‡РёРµ Р·Р°РґР°С‡ Рё РІС‹РІРµСЃС‚Рё РёС…
+ * @param $con РџРѕРґРєР»СЋС‡РµРЅРёРµ Рє Р‘Р”
+ * @param int|null $projectId Р—Р°РґР°С‡Р°
+ * @return array|null РњР°СЃСЃРёРІ Р·Р°РґР°С‡
  */
 function getTasks($con, $projectId = null)
 {
@@ -47,7 +47,7 @@ function getTasks($con, $projectId = null)
 
     if (!$result) {
         $error = mysqli_error($con);
-        echo "Ошибка MySQL:" . $error;
+        echo "РћС€РёР±РєР° MySQL:" . $error;
         die;
     }
     $tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -58,10 +58,10 @@ function getTasks($con, $projectId = null)
 
 /**
  *
- * Проверка существования проекта
- * @param $con Подкючение к БД
- * @param $projectId Идентификатор проета
- * @return bool Проект есть или нет
+ * РџСЂРѕРІРµСЂРєР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёСЏ РїСЂРѕРµРєС‚Р°
+ * @param $con РџРѕРґРєСЋС‡РµРЅРёРµ Рє Р‘Р”
+ * @param $projectId РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РїСЂРѕРµС‚Р°
+ * @return bool РџСЂРѕРµРєС‚ РµСЃС‚СЊ РёР»Рё РЅРµС‚
  */
 function projectExists($con, $projectId)
 {
@@ -71,7 +71,7 @@ function projectExists($con, $projectId)
 
     if (!$result) {
         $error = mysqli_error($con);
-        echo "Ошибка MySQL:" . $error;
+        echo "РћС€РёР±РєР° MySQL:" . $error;
         die;
     }
 
@@ -81,10 +81,38 @@ function projectExists($con, $projectId)
 }
 
 /**
- * Количество задач для проекта
+ *
+ * РџСЂРѕРІРµСЂСЏРµС‚ СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РІ Р±Р°Р·Рµ.
+ * @param $con
+ * @param $username
+ * @return bool
+ */
+
+function userExists($con, $username)
+{
+    $sql = sprintf("SELECT COUNT(*) as usersCount FROM users WHERE username = '%s'",
+        $username
+    );
+
+    $result = mysqli_query($con, $sql);
+
+    if (!$result) {
+        $error = mysqli_error($con);
+        echo "РћС€РёР±РєР° MySQL:" . $error;
+        die;
+    }
+
+    $usersCount = (int)mysqli_fetch_assoc($result)['usersCount'];
+
+    return $usersCount > 0;
+}
+
+
+/**
+ * РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РґР°С‡ РґР»СЏ РїСЂРѕРµРєС‚Р°
  *
  * @param $con
- * @return array|bool|mysqli_result Возращает массив с результатом выполнения запроса
+ * @return array|bool|mysqli_result Р’РѕР·СЂР°С‰Р°РµС‚ РјР°СЃСЃРёРІ СЃ СЂРµР·СѓР»СЊС‚Р°С‚РѕРј РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РїСЂРѕСЃР°
  */
 function projectTaskCount($con)
 {
@@ -94,7 +122,7 @@ function projectTaskCount($con)
 
     if (!$result) {
         $error = mysqli_error($con);
-        echo "Ошибка MySQL:" . $error;
+        echo "РћС€РёР±РєР° MySQL:" . $error;
         die;
     }
     $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
