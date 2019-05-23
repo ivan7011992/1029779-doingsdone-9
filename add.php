@@ -22,7 +22,6 @@ function checkErrors($con)
         if (!is_date_valid($_POST['date'])) {
             $errors['date'] = 'Неверный формат даты';
         } else {
-            //todo
             if (strtotime($_POST['date']) < '') {
                 $errors['date'] = 'Дата должна быть больше или равна текущей';
             }
@@ -44,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $fileName = $_FILES['file']['name'];
             rename($_FILES['file']['tmp_name'], './uploads/' . $fileName);
             var_dump($_FILES['file']['name']);
-         }
+        }
 
         $name = $_POST['name'];
         $project_id = $_POST['project'];
