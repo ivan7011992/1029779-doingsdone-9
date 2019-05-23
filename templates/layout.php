@@ -4,13 +4,15 @@
  * @var array $projects
  * @var array $projectTaskCount
  * @var int projectId
+ * @var bool $logged
+ * @var array $user
  */
 ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title><?=$title?></title>
+    <title><?= $title ?></title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/flatpickr.min.css">
@@ -27,50 +29,71 @@
             </a>
 
             <div class="main-header__side">
-                <a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить
-                    задачу</a>
+                <?php if ($logged): ?>
+                    <a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить
+                        задачу</a>
 
-                <div class="main-header__side-item user-menu">
-                    <div class="user-menu__data">
-                        <p>Константин</p>
+                    <div class="main-header__side-item user-menu">
+                        <div class="user-menu__data">
+                            <p><?= $user ['username']?></p>
 
-                        <a href="#">Выйти</a>
+                            <a href="/logout.php">Выйти</a>
+                        </div>
                     </div>
-                </div>
+                <?php else : ?>
+                    <a class="main-header__side-item button button--transparent"
+                       href="auth.php">Войти</a>
+                <?php endif; ?>
             </div>
         </header>
 
         <div class="content">
-            <section class="content__side">
-                <h2 class="content__side-heading">Проекты</h2>
+            <?php if ($logged): ?>
+                <section class="content__side">
+                    <h2 class="content__side-heading">Проекты</h2>
 
-                <nav class="main-navigation">
+                    <nav class="main-navigation">
 
-                    <ul class="main-navigation__list">
-                        <?php
-                        foreach ($projects as $category): ?>
-                            <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link
+                        <ul class="main-navigation__list">
+                            <?php
+                            foreach ($projects as $category): ?>
+                                <li class="main-navigation__list-item">
+                                    <a class="main-navigation__list-item-link
                                 <?php if ($projectId === (int)$category['id']): ?>main-navigation__list-item--active <?php endif ?>"
-                                   href="?project_id=<?= $category['id'] ?>"><?= esc($category['name']) ?></a>
-                                <span class="main-navigation__list-item-count">
+                                       href="?project_id=<?= $category['id'] ?>"><?= esc($category['name']) ?></a>
+                                    <span class="main-navigation__list-item-count">
                                     <?php if (array_key_exists($category['id'], $projectTaskCount)): ?>
                                         <?= $projectTaskCount[$category['id']] ?>
                                     <?php else: ?>
                                         0
                                     <?php endif ?>
                                 </span>
-                            </li>
-                        <?php endforeach ?>
-                    </ul>
-                </nav>
-                <a class="button button--transparent button--plus content__side-button"
-                   href="pages/form-project.html" target="project_add">Добавить проект</a>
-            </section>
+                                </li>
+                            <?php endforeach ?>
+                        </ul>
+                    </nav>
+                    <a class="button button--transparent button--plus content__side-button"
+                       href="pages/form-project.html" target="project_add">Добавить проект</a>
+                </section>
 
-            <main class="content__main">
-                <?= $content ?>
-            </main>
+                <main class="content__main">
+                    <?= $content ?>
+                </main>
+            <?php else: ?>
+                <section class="welcome">
+                    <h2 class="welcome__heading">«Дела в порядке»</h2>
+
+                    <div class="welcome__text">
+                        <p>«Дела в порядке» — это веб приложение для удобного ведения списка дел. Сервис помогает
+                            пользователям не забывать о предстоящих важных событиях и задачах.</p>
+
+                        <p>После создания аккаунта, пользователь может начать вносить свои дела, деля их по проектам и
+                            указывая сроки.</p>
+                    </div>
+
+                    <a class="welcome__button button" href="register.html">Зарегистрироваться</a>
+                </section>
+            <?php endif; ?>
         </div>
     </div>
 </div>
@@ -83,7 +106,9 @@
             <p>Веб-приложение для удобного ведения списка дел.</p>
         </div>
 
-        <a class="main-footer__button button button--plus" href="add.php">Добавить задачу</a>
+        <?php if ($logged): ?>
+            <a class="main-footer__button button button--plus" href="add.php">Добавить задачу</a>
+        <?php endif; ?>
 
         <div class="main-footer__social social">
             <span class="visually-hidden">Мы в соцсетях:</span>

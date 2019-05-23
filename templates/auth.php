@@ -9,33 +9,33 @@
 </head>
 
 <body>
-<h1 class="visually-hidden">Дела в порядке</h1>
+<h1 class="visually-hidden">Р”РµР»Р° РІ РїРѕСЂСЏРґРєРµ</h1>
 
 <div class="page-wrapper">
     <div class="container container--with-sidebar">
 
         <header class="main-header">
             <a href="#">
-                <img src="../img/logo.png" width="153" height="42" alt="Логитип Дела в порядке">
+                <img src="../img/logo.png" width="153" height="42" alt="Р›РѕРіРёС‚РёРї Р”РµР»Р° РІ РїРѕСЂСЏРґРєРµ">
             </a>
 
             <div class="main-header__side">
-                <a class="main-header__side-item button button--transparent" href="form-authorization.html">Войти</a>
+                <a class="main-header__side-item button button--transparent" href="form-authorization.html">Р’РѕР№С‚Рё</a>
             </div>
         </header>
 
         <div class="content">
 
             <section class="content__side">
-                <p class="content__side-info">Если у вас уже есть аккаунт, авторизуйтесь на сайте</p>
+                <p class="content__side-info">Р•СЃР»Рё Сѓ РІР°СЃ СѓР¶Рµ РµСЃС‚СЊ Р°РєРєР°СѓРЅС‚, Р°РІС‚РѕСЂРёР·СѓР№С‚РµСЃСЊ РЅР° СЃР°Р№С‚Рµ</p>
 
-                <a class="button button--transparent content__side-button" href="form-authorization.html">Войти</a>
+                <a class="button button--transparent content__side-button" href="form-authorization.html">Р’РѕР№С‚Рё</a>
             </section>
 
             <main class="content__main">
-                <h2 class="content__main-heading">Вход на сайт</h2>
+                <h2 class="content__main-heading">Р’С…РѕРґ РЅР° СЃР°Р№С‚</h2>
 
-                <form class="form" action="auth.php.html"
+                <form class="form" action="auth.php"
                       enctype="multipart/form-data"
                       method="post"
                       autocomplete="off">
@@ -48,26 +48,26 @@
                                id="email"
                                value="" placeholder="<?= $form_data['email'] ?? '' ?>">
                         <?php if (array_key_exists('email', $errors)): ?>
-                            <p class="form__message">E-mail введён некорректно</p><?= $errors['email'] ?></p>
+                            <p class="form__message">E-mail РІРІРµРґС‘РЅ РЅРµРєРѕСЂСЂРµРєС‚РЅРѕ</p><?= $errors['email'] ?></p>
                         <?php endif ?>
                     </div>
 
                     <div class="form__row">
-                        <label class="form__label"  for="password">Пароль <sup>*</sup></label>
+                        <label class="form__label"  for="password">РџР°СЂРѕР»СЊ <sup>*</sup></label>
 
                         <input class="form__input" <?php if (array_key_exists('password', $errors)): ?> form__input--error <?php endif ?>
                                type="password"
                                name="password"
                                id="password"
                                value=""
-                               placeholder="Введите пароль">
+                               placeholder="Р’РІРµРґРёС‚Рµ РїР°СЂРѕР»СЊ">
                         <?php if (array_key_exists('password', $errors)): ?>
-                            <p class="form__message">E-mail введён некорректно</p><?= $errors['password'] ?></p>
+                            <p class="form__message">E-mail РІРІРµРґС‘РЅ РЅРµРєРѕСЂСЂРµРєС‚РЅРѕ</p><?= $errors['password'] ?></p>
                         <?php endif ?>
                     </div>
 
                     <div class="form__row form__row--controls">
-                        <input class="button" type="submit" name="" value="Войти">
+                        <input class="button" type="submit" name="" value="Р’РѕР№С‚Рё">
                     </div>
                 </form>
 
@@ -81,13 +81,13 @@
 <footer class="main-footer">
     <div class="container">
         <div class="main-footer__copyright">
-            <p>© 2019, «Дела в порядке»</p>
+            <p>В© 2019, В«Р”РµР»Р° РІ РїРѕСЂСЏРґРєРµВ»</p>
 
-            <p>Веб-приложение для удобного ведения списка дел.</p>
+            <p>Р’РµР±-РїСЂРёР»РѕР¶РµРЅРёРµ РґР»СЏ СѓРґРѕР±РЅРѕРіРѕ РІРµРґРµРЅРёСЏ СЃРїРёСЃРєР° РґРµР».</p>
         </div>
 
         <div class="main-footer__social social">
-            <span class="visually-hidden">Мы в соцсетях:</span>
+            <span class="visually-hidden">РњС‹ РІ СЃРѕС†СЃРµС‚СЏС…:</span>
             <a class="social__link social__link--facebook" href="#">
                 <span class="visually-hidden">Facebook</span>
                 <svg width="27" height="27" viewBox="0 0 27 27" xmlns="http://www.w3.org/2000/svg">
@@ -116,7 +116,7 @@
             </a>
             <span class="visually-hidden">,</span>
             <a class="social__link social__link--vkontakte" href="#">
-                <span class="visually-hidden">Вконтакте</span>
+                <span class="visually-hidden">Р’РєРѕРЅС‚Р°РєС‚Рµ</span>
                 <svg width="27" height="27" viewBox="0 0 27 27" xmlns="http://www.w3.org/2000/svg">
                     <circle stroke="#879296" fill="none" cx="13.5" cy="13.5" r="12.666"/>
                     <path fill="#879296"
@@ -126,7 +126,7 @@
         </div>
 
         <div class="main-footer__developed-by">
-            <span class="visually-hidden">Разработано:</span>
+            <span class="visually-hidden">Р Р°Р·СЂР°Р±РѕС‚Р°РЅРѕ:</span>
 
             <a href="https://htmlacademy.ru/intensive/php">
                 <img src="../img/htmlacademy.svg" alt="HTML Academy" width="118" height="40">

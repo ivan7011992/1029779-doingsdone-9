@@ -3,6 +3,8 @@
 require_once('init.php');
 require_once('db.php');
 
+session_start();
+
 function checkErrors($con)
 {
     $errors = [];
@@ -12,8 +14,12 @@ function checkErrors($con)
     }
 
     // if project with id exist
-    if (!projectExists($con, $_POST['project'])) {
-        $errors['project'] = 'Проекта не существует';
+    if (empty($_POST['project'])) {
+        $errors['project'] = 'Проект не задан';
+    } else {
+        if (!projectExists($con, $_POST['project'])) {
+            $errors['project'] = 'Проекта не существует';
+        }
     }
 
     if (empty($_POST['date'])) {
@@ -31,6 +37,9 @@ function checkErrors($con)
     return $errors;
 }
 
+if (!isset($_SESSION['user'])) {
+    header("Location: /index.php", true, 301);
+}
 $errors = [];
 
 
@@ -66,24 +75,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 
-$projects = getProjects($con);
-$projectTaskCount = projectTaskCount($con);
-
 $content = include_template('add.php', [
     'errors' => $errors,
     'form_data' => $_POST,
-    'projects' => $projects,
+    'projects' => getProjects($con),
 ]);
 
 
-$layout = include_template('layout.php', [
+$layout = include_template('layout.php', array_merge([
     'title' => 'Иван Васильев',
-    'projects' => $projects,
-    'projectTaskCount' => $projectTaskCount,
     'projectId' => null,
     'content' => $content,
-
-]);
+], layoutVars($con)));
 
 echo $layout;
 

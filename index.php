@@ -3,10 +3,10 @@
 
 require_once('init.php');
 require_once('db.php');
+
 $show_complete_tasks = rand(0, 1);
 
-$projectTaskCount = projectTaskCount($con);
-$projects = getProjects($con);
+session_start();
 
 $projectId = null;
 if (!empty($_GET['project_id'])) {
@@ -31,13 +31,11 @@ $content = include_template('index.php', [
 ]);
 
 
-$layout = include_template('layout.php', [
+$layout = include_template('layout.php', array_merge([
     'title' => 'Иван Васильев',
-    'projects' => $projects,
-    'projectTaskCount' => $projectTaskCount,
     'projectId' => $projectId,
     'content' => $content,
-]);
+], layoutVars($con)));
 
 echo $layout;
 

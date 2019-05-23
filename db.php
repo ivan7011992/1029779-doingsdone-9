@@ -134,3 +134,16 @@ function projectTaskCount($con)
 
     return $result;
 }
+
+function layoutVars($con) {
+    $projectTaskCount = projectTaskCount($con);
+    $projects = getProjects($con);
+
+    return [
+        'logged' => array_key_exists('user', $_SESSION),
+        'user' => $_SESSION['user'],
+        'projects' => $projects,
+        'projectTaskCount' => $projectTaskCount,
+    ];
+}
+
