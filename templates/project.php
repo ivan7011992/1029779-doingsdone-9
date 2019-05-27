@@ -1,100 +1,92 @@
 <?php
 /**
- * @var string $title
+*  @var array $projectTaskCount
  * @var array $projects
- * @var array $projectTaskCount
- * @var int projectId
- * @var bool $logged
- * @var array $user
  */
 ?>
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
-    <title><?= $title ?></title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/flatpickr.min.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
-<h1 class="visually-hidden">Р”РµР»Р° РІ РїРѕСЂСЏРґРєРµ</h1>
+<h1 class="visually-hidden">Дела в порядке</h1>
 
 <div class="page-wrapper">
     <div class="container container--with-sidebar">
         <header class="main-header">
-            <a href="/">
-                <img src="img/logo.png" width="153" height="42" alt="Р›РѕРіРѕС‚РёРї Р”РµР»Р° РІ РїРѕСЂСЏРґРєРµ">
+            <a href="#">
+                <img src="../img/logo.png" width="153" height="42" alt="Логитип Дела в порядке">
             </a>
 
             <div class="main-header__side">
-                <?php if ($logged): ?>
-                    <a class="main-header__side-item button button--plus open-modal" href="add.php">Р”РѕР±Р°РІРёС‚СЊ
-                        Р·Р°РґР°С‡Сѓ</a>
+                <a class="main-header__side-item button button--plus" href="form-task.html">Добавить задачу</a>
 
-                    <div class="main-header__side-item user-menu">
-                        <div class="user-menu__data">
+                <div class="main-header__side-item user-menu">
+                    <div class="user-menu__data">
+                        <p>Константин</p>
 
-                            <p><?= $user ['username']?></p>
-
-                            <a href="/logout.php">Р’С‹Р№С‚Рё</a>
-                        </div>
+                        <a href="#">Выйти</a>
                     </div>
-                <?php else : ?>
-                    <a class="main-header__side-item button button--transparent"
-                       href="auth.php">Р’РѕР№С‚Рё</a>
-                <?php endif; ?>
+                </div>
             </div>
         </header>
 
         <div class="content">
-            <?php if ($logged): ?>
-                <section class="content__side">
-                    <h2 class="content__side-heading">РџСЂРѕРµРєС‚С‹</h2>
+            <section class="content__side">
+                <h2 class="content__side-heading">Проекты</h2>
 
-                    <nav class="main-navigation">
-
-                        <ul class="main-navigation__list">
-                            <?php
-                            foreach ($projects as $category): ?>
-                                <li class="main-navigation__list-item">
-                                    <a class="main-navigation__list-item-link
-                                <?php if ($projectId === (int)$category['id']): ?>main-navigation__list-item--active <?php endif ?>"
-                                       href="?project_id=<?= $category['id'] ?>"><?= esc($category['name']) ?></a>
-                                    <span class="main-navigation__list-item-count">
-                                    <?php if (array_key_exists($category['id'], $projectTaskCount)): ?>
-                                        <?= $projectTaskCount[$category['id']] ?>
+                <nav class="main-navigation">
+                    <ul class="main-navigation__list">
+                        <?php foreach ($projects as $project): ?>
+                            <li class="main-navigation__list-item">
+                                <a class="main-navigation__list-item-link" href="#"><?= $project['name'] ?></a>
+                                <span class="main-navigation__list-item-count">
+                                    <?php if (array_key_exists($project['id'], $projectTaskCount)): ?>
+                                        <?= $projectTaskCount[$project['id']] ?>
                                     <?php else: ?>
                                         0
                                     <?php endif ?>
                                 </span>
-                                </li>
-                            <?php endforeach ?>
-                        </ul>
-                    </nav>
-                    <a class="button button--transparent button--plus content__side-button"
-                       href="pages/form-project.html" target="project_add">Р”РѕР±Р°РІРёС‚СЊ РїСЂРѕРµРєС‚</a>
-                </section>
+                            </li>
+                        <?php endforeach ?>
+                    </ul>
+                </nav>
 
-                <main class="content__main">
-                    <?= $content ?>
-                </main>
-            <?php else: ?>
-                <section class="welcome">
-                    <h2 class="welcome__heading">В«Р”РµР»Р° РІ РїРѕСЂСЏРґРєРµВ»</h2>
+                <a class="button button--transparent button--plus content__side-button" href="form-project.html">Добавить
+                    проект</a>
+            </section>
 
-                    <div class="welcome__text">
-                        <p>В«Р”РµР»Р° РІ РїРѕСЂСЏРґРєРµВ» вЂ” СЌС‚Рѕ РІРµР± РїСЂРёР»РѕР¶РµРЅРёРµ РґР»СЏ СѓРґРѕР±РЅРѕРіРѕ РІРµРґРµРЅРёСЏ СЃРїРёСЃРєР° РґРµР». РЎРµСЂРІРёСЃ РїРѕРјРѕРіР°РµС‚
-                            РїРѕР»СЊР·РѕРІР°С‚РµР»СЏРј РЅРµ Р·Р°Р±С‹РІР°С‚СЊ Рѕ РїСЂРµРґСЃС‚РѕСЏС‰РёС… РІР°Р¶РЅС‹С… СЃРѕР±С‹С‚РёСЏС… Рё Р·Р°РґР°С‡Р°С….</p>
+            <main class="content__main">
+                <h2 class="content__main-heading">Добавление проекта</h2>
 
-                        <p>РџРѕСЃР»Рµ СЃРѕР·РґР°РЅРёСЏ Р°РєРєР°СѓРЅС‚Р°, РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РјРѕР¶РµС‚ РЅР°С‡Р°С‚СЊ РІРЅРѕСЃРёС‚СЊ СЃРІРѕРё РґРµР»Р°, РґРµР»СЏ РёС… РїРѕ РїСЂРѕРµРєС‚Р°Рј Рё
-                            СѓРєР°Р·С‹РІР°СЏ СЃСЂРѕРєРё.</p>
+                <form class="form" action="project.php" enctype="multipart/form-data" method="post" autocomplete="off">
+                    <div class="form__row">
+                        <label class="form__label" for="project_name">Название <sup>*</sup></label>
+
+                        <input class="form__input   <?php if (array_key_exists('name', $errors)): ?> form__input--error <?php endif ?>"
+                               type="text"
+                               name="name"
+                               id="project_name"
+                               value=" <?php if (!empty($form_data['name'])) echo $form_data['name'] ?>"
+                               placeholder="Введите название проекта">
+                        <?php if (array_key_exists('name', $errors)) : ?>
+                            <p class="form__message">
+                                <?= $errors['name'] ?>
+                            </p>
+                        <?php endif ?>
                     </div>
 
-                    <a class="welcome__button button" href="register.php">Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊСЃСЏ</a>
-                </section>
-            <?php endif; ?>
+                    <div class="form__row form__row--controls">
+                        <input class="button" type="submit" name="" value="Добавить">
+                    </div>
+                </form>
+            </main>
         </div>
     </div>
 </div>
@@ -102,17 +94,15 @@
 <footer class="main-footer">
     <div class="container">
         <div class="main-footer__copyright">
-            <p>В© 2019, В«Р”РµР»Р° РІ РїРѕСЂСЏРґРєРµВ»</p>
+            <p>© 2019, «Дела в порядке»</p>
 
-            <p>Р’РµР±-РїСЂРёР»РѕР¶РµРЅРёРµ РґР»СЏ СѓРґРѕР±РЅРѕРіРѕ РІРµРґРµРЅРёСЏ СЃРїРёСЃРєР° РґРµР».</p>
+            <p>Веб-приложение для удобного ведения списка дел.</p>
         </div>
 
-        <?php if ($logged): ?>
-            <a class="main-footer__button button button--plus" href="add.php">Р”РѕР±Р°РІРёС‚СЊ Р·Р°РґР°С‡Сѓ</a>
-        <?php endif; ?>
+        <a class="main-footer__button button button--plus" href="form-task.html">Добавить задачу</a>
 
         <div class="main-footer__social social">
-            <span class="visually-hidden">РњС‹ РІ СЃРѕС†СЃРµС‚СЏС…:</span>
+            <span class="visually-hidden">Мы в соцсетях:</span>
             <a class="social__link social__link--facebook" href="#">
                 <span class="visually-hidden">Facebook</span>
                 <svg width="27" height="27" viewBox="0 0 27 27" xmlns="http://www.w3.org/2000/svg">
@@ -141,7 +131,7 @@
             </a>
             <span class="visually-hidden">,</span>
             <a class="social__link social__link--vkontakte" href="#">
-                <span class="visually-hidden">Р’РєРѕРЅС‚Р°РєС‚Рµ</span>
+                <span class="visually-hidden">Вконтакте</span>
                 <svg width="27" height="27" viewBox="0 0 27 27" xmlns="http://www.w3.org/2000/svg">
                     <circle stroke="#879296" fill="none" cx="13.5" cy="13.5" r="12.666"/>
                     <path fill="#879296"
@@ -151,16 +141,14 @@
         </div>
 
         <div class="main-footer__developed-by">
-            <span class="visually-hidden">Р Р°Р·СЂР°Р±РѕС‚Р°РЅРѕ:</span>
+            <span class="visually-hidden">Разработано:</span>
 
             <a href="https://htmlacademy.ru/intensive/php">
-                <img src="img/htmlacademy.svg" alt="HTML Academy" width="118" height="40">
+                <img src="../img/htmlacademy.svg" alt="HTML Academy" width="118" height="40">
             </a>
         </div>
     </div>
 </footer>
-
-<script src="flatpickr.js"></script>
-<script src="script.js"></script>
 </body>
 </html>
+ф

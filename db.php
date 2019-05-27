@@ -5,6 +5,7 @@
  * @param $con Подключение к БД
  * @return array Проекты
  */
+
 function getProjects($con)
 {
     $sql = "SELECT * FROM projects ";
@@ -141,7 +142,7 @@ function layoutVars($con) {
 
     return [
         'logged' => array_key_exists('user', $_SESSION),
-        'user' => $_SESSION['user'],
+        'user' => $_SESSION ['user'],
         'projects' => $projects,
         'projectTaskCount' => $projectTaskCount,
     ];
