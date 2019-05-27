@@ -3,16 +3,19 @@
 require_once('init.php');
 require_once('db.php');
 
+session_start();
+
 function checkErrorsProject($con)
 {
 
     $errors = [];
 
-    if (empty($_POST['name'])) {
-        $errors['project'] = '������ �� �����';
+    $name = trim($_POST['name']);
+    if (empty($name)) {
+        $errors['name'] = 'Название проекта должно быть непустым';
     } else {
-        if (!projectExists($con, $_POST['project'])) {
-            $errors['name'] = '������� �� ����������';
+        if (projectWithNameExists($con, $_POST['name'])) {
+            $errors['name'] = 'Проект с таким именем уже существует';
         }
     }
 
@@ -20,22 +23,16 @@ function checkErrorsProject($con)
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $errors  =checkErrorsProject($con);
+    $errors = checkErrorsProject($con);
+
     if (count($errors) === 0) {
+        $name = trim($_POST['name']);
 
-        $name = $_POST['name'];
-
-
-
-        $sql = "INSERT INTO projects (name)
-              VALUES (name)";
+        $sql = "INSERT INTO projects (name) VALUES (?)";
         $stmt = db_get_prepare_stmt($con, $sql, [
-
             $name,
-
         ]);
         $insertResult = mysqli_stmt_execute($stmt);
-
 
         header("Location: /index.php", true, 301);
         exit();
@@ -43,6 +40,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 }
 
-$content = include_template('project.php', array_merge ([
+$content = include_template('project.php', [
     'errors' => $errors,
-    'form_data' => $_POST, ], layoutVars($con)));
+    'form_data' => $_POST
+]);
+
+$layout = include_template('layout.php', array_merge([
+    'title' => 'Иван Васильев',
+    'projectId' => $projectId,
+    'content' => $content,
+], layoutVars($con)));
+
+echo $layout;

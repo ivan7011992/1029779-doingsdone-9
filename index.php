@@ -8,6 +8,15 @@ $show_complete_tasks = rand(0, 1);
 
 session_start();
 
+if (!empty($_GET['task_id'] )&& !empty($_GET['check'])){
+    if(!taskExist($con, $_GET['task_id'])) {
+        http_response_code(404);
+        die();
+    }
+
+    setTaskStatus($con, $_GET['task_id'], $_GET['check']);
+}
+
 $projectId = null;
 if (!empty($_GET['project_id'])) {
     $projectId = (int)$_GET['project_id'];
@@ -16,12 +25,12 @@ if (!empty($_GET['project_id'])) {
             http_response_code(404);
             die();
         }
-        $tasks = getTasks($con, $projectId);
+        $tasks = getTasks($con, $projectId, $_GET['filter-by-date']);
     } else {
-        $tasks = getTasks($con);
+        $tasks = getTasks($con, null, $_GET['filter-by-date']);
     }
 } else {
-    $tasks = getTasks($con);
+    $tasks = getTasks($con, null, $_GET['filter-by-date']);
 }
 
 

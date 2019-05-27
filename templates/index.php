@@ -1,3 +1,6 @@
+<?php
+/** @var array $tasks */
+?>
 <h2 class="content__main-heading">Список задач</h2>
 
 <form class="search-form" action="index.php" method="post" autocomplete="off">
@@ -8,10 +11,10 @@
 
 <div class="tasks-controls">
     <nav class="tasks-switch">
-        <a href="/" class="tasks-switch__item tasks-switch__item--active">Все задачи</a>
-        <a href="/" class="tasks-switch__item">Повестка дня</a>
-        <a href="/" class="tasks-switch__item">Завтра</a>
-        <a href="/" class="tasks-switch__item">Просроченные</a>
+        <a href="/index.php?filter-by-date=1" class="tasks-switch__item tasks-switch__item--active">Все задачи</a>
+        <a href="/index.php?filter-by-date=2" class="tasks-switch__item">Повестка дня</a>
+        <a href="/index.php?filter-by-date=3" class="tasks-switch__item">Завтра</a>
+        <a href="/index.php?filter-by-date=4" class="tasks-switch__item">Просроченные</a>
     </nav>
 
     <label class="checkbox">
@@ -34,7 +37,7 @@
             <td class="task__select">
                 <label class="checkbox task__checkbox">
                     <input class="checkbox__input visually-hidden task__checkbox" type="checkbox"
-                           value="1">
+                           value="<?= $task['id'] ?>">
                     <span class="checkbox__text"><?= esc($task['name']) ?></span>
                 </label>
             </td>

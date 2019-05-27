@@ -37,11 +37,23 @@ function getProjects($con)
  * @param int|null $projectId Задача
  * @return array|null Массив задач
  */
-function getTasks($con, $projectId = null)
+function getTasks($con, $projectId = null, $filByDate)
 {
     $sql = "SELECT * FROM tasks ";
     if ($projectId !== null) {
         $sql .= (' WHERE project_id = ' . $projectId);
+    }
+    switch($filByDate) {
+        case 1:
+
+            break;
+        case 2:
+          //  $sql ,= 'AND date_start';
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
     }
 
     $result = mysqli_query($con, $sql);
@@ -79,6 +91,64 @@ function projectExists($con, $projectId)
     $projectsCount = (int)mysqli_fetch_assoc($result)['projectsCount'];
 
     return $projectsCount > 0;
+}
+
+/**
+ *
+ * Проверка существования проекта с указанным именнм
+ * @param $con Подкючение к БД
+ * @param $projectName Идентификатор проета
+ * @return bool Проект есть или нет
+ */
+function projectWithNameExists($con, $projectName)
+{
+    $sql = sprintf("SELECT COUNT(*) as projectsCount FROM projects WHERE name='%s'", $projectName);
+
+    $result = mysqli_query($con, $sql);
+
+    if (!$result) {
+        $error = mysqli_error($con);
+        echo "Ошибка MySQL:" . $error;
+        die;
+    }
+
+    $projectsCount = (int)mysqli_fetch_assoc($result)['projectsCount'];
+
+    return $projectsCount > 0;
+}
+
+function taskExist($con, $taskId)
+{
+    $sql = sprintf("SELECT COUNT(*) as tasksCount FROM tasks WHERE id=%d", $taskId);
+
+    $result = mysqli_query($con, $sql);
+
+    if (!$result) {
+        $error = mysqli_error($con);
+        echo "Ошибка MySQL:" . $error;
+        die;
+    }
+
+    $tasksCount = (int)mysqli_fetch_assoc($result)['tasksCount'];
+
+    return $tasksCount > 0;
+}
+
+function setTaskStatus($con, $taskId, $taskStatus)
+{
+    $sql = 'UPDATE tasks set completed=? where id=?';
+
+    $stmt = db_get_prepare_stmt($con, $sql, [
+        $taskStatus,
+        $taskId,
+    ]);
+
+    $result = mysqli_stmt_execute($stmt);
+    if (!$result) {
+        $error = mysqli_error($con);
+        echo "Ошибка MySQL:" . $error;
+        die;
+    }
 }
 
 /**
@@ -136,7 +206,8 @@ function projectTaskCount($con)
     return $result;
 }
 
-function layoutVars($con) {
+function layoutVars($con)
+{
     $projectTaskCount = projectTaskCount($con);
     $projects = getProjects($con);
 
