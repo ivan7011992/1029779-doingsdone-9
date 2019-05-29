@@ -4,17 +4,30 @@
 require_once('init.php');
 require_once('db.php');
 
-$show_complete_tasks = rand(0, 1);
+$show_complete_tasks = $_GET['show_completed'];
 
 session_start();
 
-if (!empty($_GET['task_id'] )&& !empty($_GET['check'])){
-    if(!taskExist($con, $_GET['task_id'])) {
+if (!empty($_GET['task_id']) && !empty($_GET['check'])) {
+    if (!taskExist($con, $_GET['task_id'])) {
         http_response_code(404);
         die();
     }
 
     setTaskStatus($con, $_GET['task_id'], $_GET['check']);
+}
+
+$filterByDate = null;
+if (!empty($_GET['filter-by-date'])) {
+    $filterByDate = (int)$_GET['filter-by-date'];
+    if (!in_array($filterByDate, [1, 2, 3, 4])) {
+        $filterByDate = null;
+    }
+}
+
+$showComplete = false;
+if (!empty($_GET['show_completed'])) {
+    $showComplete = (bool)$_GET['show_completed'];
 }
 
 $projectId = null;
@@ -25,18 +38,21 @@ if (!empty($_GET['project_id'])) {
             http_response_code(404);
             die();
         }
-        $tasks = getTasks($con, $projectId, $_GET['filter-by-date']);
+        $tasks = getTasks($con, $projectId, $filterByDate, $showComplete);
     } else {
-        $tasks = getTasks($con, null, $_GET['filter-by-date']);
+        $tasks = getTasks($con, null, $filterByDate, $showComplete);
     }
 } else {
-    $tasks = getTasks($con, null, $_GET['filter-by-date']);
+    $tasks = getTasks($con, null, $filterByDate, $showComplete);
 }
 
 
 $content = include_template('index.php', [
     'tasks' => $tasks,
-    'show_complete_tasks' => $show_complete_tasks
+    'show_complete_tasks' => $show_complete_tasks,
+    'projectId' => $projectId,
+    'filterByDate' => $filterByDate,
+    'showComplete' => $showComplete,
 ]);
 
 

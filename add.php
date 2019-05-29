@@ -59,9 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $date = $_POST['date'];
 
         $sql = "INSERT INTO tasks (project_id, user_id, name, dowloads, date_start, completed, date_term)
-              VALUES (?, 1,?, ?, NOW(),0,?)";
+              VALUES (?,?,?, ?, NOW(),0,?)";
         $stmt = db_get_prepare_stmt($con, $sql, [
             $project_id,
+            $_SESSION['user']['id'],
             $name,
             $fileName,
             $date

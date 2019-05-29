@@ -1,5 +1,6 @@
 <?php
 /** @var array $tasks */
+
 ?>
 <h2 class="content__main-heading">Список задач</h2>
 
@@ -11,18 +12,29 @@
 
 <div class="tasks-controls">
     <nav class="tasks-switch">
-        <a href="/index.php?filter-by-date=1" class="tasks-switch__item tasks-switch__item--active">Все задачи</a>
-        <a href="/index.php?filter-by-date=2" class="tasks-switch__item">Повестка дня</a>
-        <a href="/index.php?filter-by-date=3" class="tasks-switch__item">Завтра</a>
-        <a href="/index.php?filter-by-date=4" class="tasks-switch__item">Просроченные</a>
+        <?php
+        $filterTypes = [
+            1 => 'Все задачи',
+            2 => 'Повестка дня',
+            3 => 'Завтра',
+            4 => 'Просроченные'
+        ]
+        ?>
+        <?php foreach ($filterTypes as $filterVal => $filterName): ?>
+            <a href="/index.php?<?php if ($projectId !== null) echo 'project_id=' . $projectId . '&' ?>filter-by-date=<?= $filterVal ?>"
+               class="tasks-switch__item <?php if ($filterByDate === $filterVal): ?>tasks-switch__item--active <?php endif ?>">
+                <?= $filterName ?></a>
+        <?php endforeach; ?>
     </nav>
 
     <label class="checkbox">
 
         <!--добавить сюда аттрибут "checked", если переменная $show_complete_tasks равна единице-->
-        <input class="checkbox__input visually-hidden show_completed"
-               type="checkbox" <?php if ($show_complete_tasks === 1): ?> checked <?php endif ?> >
-        <span class="checkbox__text">Показывать выполненные</span>
+        <a href="/index.php?<?php if ($projectId !== null) echo 'project_id=' . $projectId . '&' ?><?php if ($filterByDate !== null) echo 'filter-by-date=' . $filterByDate . '&' ?>show_completed=<?php if($showComplete) echo '0'; else echo '1'?>"  >
+            <input class="checkbox__input visually-hidden"
+                   type="checkbox" <?php if ($showComplete): ?> checked <?php endif ?> >
+            <span class="checkbox__text">Показывать выполненные</span>
+        </a>
     </label>
 </div>
 

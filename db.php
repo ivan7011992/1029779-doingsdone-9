@@ -35,28 +35,35 @@ function getProjects($con)
  * Проверить на наличие задач и вывести их
  * @param $con Подключение к БД
  * @param int|null $projectId Задача
+ * @param $filByDate
  * @return array|null Массив задач
  */
-function getTasks($con, $projectId = null, $filByDate)
+function getTasks($con, $projectId = null, $filByDate, $showComplete)
 {
-    $sql = "SELECT * FROM tasks ";
+    $sql = "SELECT * FROM tasks WHERE 1=1";
+
     if ($projectId !== null) {
-        $sql .= (' WHERE project_id = ' . $projectId);
+        $sql .= (' AND project_id = ' . $projectId);
     }
+
     switch($filByDate) {
         case 1:
-
             break;
         case 2:
-          //  $sql ,= 'AND date_start';
-         $sql =  "SELECT * FROM tasks WHERE date_term = date_format(now(), '%y-%m-%d')";
+         $sql .=  " AND date_term = date (now())";
             break;
         case 3:
-         $sql = "SELECT * FROM tasks WHERE date_term = date_format(now()  + INTERVAL 1 DAY , '%y-%m-%d' )";
+         $sql .= " AND date_term = date(now()  + INTERVAL 1 DAY)";
             break;
         case 4:
-         $sql = "SELECT * FROM tasks WHERE   date_format(now() , '%y-%m-%d' ) > date_term";
+         $sql .= " AND date_term < date(now())";
             break;
+        default:
+            break;
+    }
+
+    if(!$showComplete) {
+       $sql .= ' AND completed = 0';
     }
 
     $result = mysqli_query($con, $sql);

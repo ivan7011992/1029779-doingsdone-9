@@ -22,6 +22,7 @@ function checkErrorsProject($con)
     return $errors;
 }
 
+$errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = checkErrorsProject($con);
 
