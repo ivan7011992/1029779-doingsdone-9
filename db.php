@@ -38,7 +38,7 @@ function getProjects($con)
  * @param $filByDate
  * @return array|null Массив задач
  */
-function getTasks($con, $projectId = null, $filByDate, $showComplete)
+function getTasks($con, $projectId = null, $filByDate, $showComplete, $search)
 {
     $sql = "SELECT * FROM tasks WHERE 1=1";
 
@@ -64,6 +64,10 @@ function getTasks($con, $projectId = null, $filByDate, $showComplete)
 
     if(!$showComplete) {
        $sql .= ' AND completed = 0';
+    }
+
+    if(!empty($search)) {
+        // $sql .= 'AND ';
     }
 
     $result = mysqli_query($con, $sql);

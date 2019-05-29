@@ -17,6 +17,11 @@ if (!empty($_GET['task_id']) && !empty($_GET['check'])) {
     setTaskStatus($con, $_GET['task_id'], $_GET['check']);
 }
 
+$search = null;
+if(!empty($_GET['search'])) {
+    $search = $_GET['search'];
+}
+
 $filterByDate = null;
 if (!empty($_GET['filter-by-date'])) {
     $filterByDate = (int)$_GET['filter-by-date'];
@@ -38,12 +43,12 @@ if (!empty($_GET['project_id'])) {
             http_response_code(404);
             die();
         }
-        $tasks = getTasks($con, $projectId, $filterByDate, $showComplete);
+        $tasks = getTasks($con, $projectId, $filterByDate, $showComplete, $search);
     } else {
-        $tasks = getTasks($con, null, $filterByDate, $showComplete);
+        $tasks = getTasks($con, null, $filterByDate, $showComplete, $search);
     }
 } else {
-    $tasks = getTasks($con, null, $filterByDate, $showComplete);
+    $tasks = getTasks($con, null, $filterByDate, $showComplete, $search);
 }
 
 
@@ -53,6 +58,7 @@ $content = include_template('index.php', [
     'projectId' => $projectId,
     'filterByDate' => $filterByDate,
     'showComplete' => $showComplete,
+    'search' => $search
 ]);
 
 
