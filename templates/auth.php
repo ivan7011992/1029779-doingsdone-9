@@ -20,7 +20,7 @@
             </a>
 
             <div class="main-header__side">
-                <a class="main-header__side-item button button--transparent" href="form-authorization.html">Войти</a>
+                <a class="main-header__side-item button button--transparent" href="auth.php">Войти</a>
             </div>
         </header>
 
@@ -29,7 +29,7 @@
             <section class="content__side">
                 <p class="content__side-info">Если у вас уже есть аккаунт, авторизуйтесь на сайте</p>
 
-                <a class="button button--transparent content__side-button" href="form-authorization.html">Войти</a>
+                <a class="button button--transparent content__side-button" href="auth.php">Войти</a>
             </section>
 
             <main class="content__main">
@@ -62,7 +62,7 @@
                                value=""
                                placeholder="Введите пароль">
                         <?php if (array_key_exists('password', $errors)): ?>
-                            <p class="form__message">E-mail введён некорректно</p><?= $errors['password'] ?></p>
+                            <p class="form__message">Неверный пароль</p><?= $errors['password'] ?></p>
                         <?php endif ?>
                     </div>
 

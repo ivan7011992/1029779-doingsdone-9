@@ -49,10 +49,13 @@ function getTasks($con, $projectId = null, $filByDate)
             break;
         case 2:
           //  $sql ,= 'AND date_start';
+         $sql =  "SELECT * FROM tasks WHERE date_term = date_format(now(), '%y-%m-%d')";
             break;
         case 3:
+         $sql = "SELECT * FROM tasks WHERE date_term = date_format(now()  + INTERVAL 1 DAY , '%y-%m-%d' )";
             break;
         case 4:
+         $sql = "SELECT * FROM tasks WHERE   date_format(now() , '%y-%m-%d' ) > date_term";
             break;
     }
 
