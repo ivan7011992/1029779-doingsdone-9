@@ -4,9 +4,11 @@
 ?>
 <h2 class="content__main-heading">Список задач</h2>
 
-<form class="search-form" action="index.php" method="get" autocomplete="off">
-    <input class="search-form__input" type="text" name="search" value="<?= $search ?>" placeholder="Поиск по задачам">
-
+<form class="search-form" action="index.php" method="GET" autocomplete="off">
+    <input class="search-form__input" type="text"
+           name="search"
+           value="<?= $search ?>"
+           placeholder="Поиск по задачам">
     <input class="search-form__submit" type="submit" name="" value="Искать">
 </form>
 
@@ -30,7 +32,7 @@
     <label class="checkbox">
 
         <!--добавить сюда аттрибут "checked", если переменная $show_complete_tasks равна единице-->
-        <a href="/index.php?<?php if ($projectId !== null) echo 'project_id=' . $projectId . '&' ?><?php if ($filterByDate !== null) echo 'filter-by-date=' . $filterByDate . '&' ?>show_completed=<?php if($showComplete) echo '0'; else echo '1'?>"  >
+        <a href="/index.php?<?php if ($projectId !== null) echo 'project_id=' . $projectId . '&' ?><?php if ($filterByDate !== null) echo 'filter-by-date=' . $filterByDate . '&' ?>show_completed=<?php if ($showComplete) echo '0'; else echo '1' ?>">
             <input class="checkbox__input visually-hidden"
                    type="checkbox" <?php if ($showComplete): ?> checked <?php endif ?> >
             <span class="checkbox__text">Показывать выполненные</span>
@@ -58,7 +60,7 @@
             </td>
             <td class="task__date"><?= $task['date_start'] ?></td>
             </tr>
-        <?php elseif ($task['completed'] === '1' && $show_complete_tasks === 1): ?>
+        <?php elseif ($task['completed'] === '1'): ?>
             <tr class="tasks__item task task--completed">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">

@@ -34,40 +34,47 @@ function getProjects($con)
  *
  * Проверить на наличие задач и вывести их
  * @param $con Подключение к БД
- * @param int|null $projectId Задача
- * @param $filByDate
+ * @param array $criteria
  * @return array|null Массив задач
  */
-function getTasks($con, $projectId = null, $filByDate, $showComplete, $search)
+function getTasks($con, array $criteria = [])
 {
     $sql = "SELECT * FROM tasks WHERE 1=1";
 
-    if ($projectId !== null) {
-        $sql .= (' AND project_id = ' . $projectId);
+    if (!empty($criteria['project_id'])) {
+        $sql .= sprintf(' AND project_id = %d', $criteria['project_id']);
     }
 
-    switch($filByDate) {
-        case 1:
-            break;
-        case 2:
-         $sql .=  " AND date_term = date (now())";
-            break;
-        case 3:
-         $sql .= " AND date_term = date(now()  + INTERVAL 1 DAY)";
-            break;
-        case 4:
-         $sql .= " AND date_term < date(now())";
-            break;
-        default:
-            break;
+    if (!empty($criteria['filByDate'])) {
+        switch ($criteria['filByDate']) {
+            case 1:
+                break;
+            case 2:
+                $sql .= " AND date_term = date (now())";
+                break;
+            case 3:
+                $sql .= " AND date_term = date(now()  + INTERVAL 1 DAY)";
+                break;
+            case 4:
+                $sql .= " AND date_term < date(now())";
+                break;
+            default:
+                break;
+        }
     }
 
-    if(!$showComplete) {
-       $sql .= ' AND completed = 0';
+    if (isset($criteria['showComplete']) && $criteria['showComplete'] !== null) {
+        if ($criteria['showComplete'] === false) {
+            $sql .= ' AND completed = 0';
+        } else {
+            // do nothing
+        }
+    } else {
+        $sql .= ' AND completed = 0';
     }
 
-    if(!empty($search)) {
-        // $sql .= 'AND ';
+    if (!empty($criteria['search'])) {
+        $sql .= sprintf(" AND MATCH (name) AGAINST('%s')", $criteria['search']);
     }
 
     $result = mysqli_query($con, $sql);
@@ -191,6 +198,24 @@ function userExists($con, $username)
 
     return $usersCount > 0;
 }
+function userWithEmailExists($con, $email)
+{
+    $sql = sprintf("SELECT COUNT(*) as usersCount FROM users WHERE email = '%s'",
+        $email
+    );
+
+    $result = mysqli_query($con, $sql);
+
+    if (!$result) {
+        $error = mysqli_error($con);
+        echo "Ошибка MySQL:" . $error;
+        die;
+    }
+
+    $usersCount = (int)mysqli_fetch_assoc($result)['usersCount'];
+
+    return $usersCount > 0;
+}
 
 
 /**
@@ -227,7 +252,7 @@ function layoutVars($con)
 
     return [
         'logged' => array_key_exists('user', $_SESSION),
-        'user' => $_SESSION ['user'],
+        'user' => $_SESSION['user'] ?? null,
         'projects' => $projects,
         'projectTaskCount' => $projectTaskCount,
     ];

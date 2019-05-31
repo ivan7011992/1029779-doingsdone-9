@@ -45,3 +45,6 @@ VALUES 	('Иван', '2019-01-01', 'ivan@mail.ru', '123456'),
 		('Сергей', '2019-01-04', 'serg@mail.ru', '123456'),
 		('Григорий', '2019-01-05', 'grig@mail.ru', '123456');
 
+CREATE FULLTEXT INDEX text_search ON tasks(name); 
+
+

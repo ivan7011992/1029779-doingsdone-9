@@ -46,7 +46,8 @@
                                type="text"
                                name="email"
                                id="email"
-                               value="" placeholder="<?= $form_data['email'] ?? '' ?>">
+                               value="<?= $form_data['email'] ?? '' ?>"
+                               placeholder="admin@mail.ru">
                         <?php if (array_key_exists('email', $errors)): ?>
                             <p class="form__message">E-mail введён некорректно</p><?= $errors['email'] ?></p>
                         <?php endif ?>

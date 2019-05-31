@@ -25,6 +25,13 @@ function checkErrorsReg($con)
         if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = 'Email должен быть корректным';
         }
+        else{
+            if(userWithEmailExists($con, $_POST['email'])){
+                $errors['email'] = 'Пользователь с таокй почтой уже существет';
+
+            }
+
+        }
     }
 
     return $errors;
@@ -41,8 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = $_POST['email'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO users (username, data_regist, email, password)
-              VALUES (?,NOW(),?,?)";
+        $sql = "INSERT INTO users (username, data_regist, email, password) VALUES (?,NOW(),?,?)";
         $stmt = db_get_prepare_stmt($con, $sql, [
             $name,
             $email,
