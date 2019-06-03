@@ -116,7 +116,7 @@ function projectExists($con, $projectId)
 
 /**
  *
- * Проверка существования проекта с указанным именнм
+ * Проверка существования проекта с указанным именем.
  * @param $con Подкючение к БД
  * @param $projectName Идентификатор проета
  * @return bool Проект есть или нет
@@ -138,6 +138,12 @@ function projectWithNameExists($con, $projectName)
     return $projectsCount > 0;
 }
 
+/**
+ * Проверяет существование задачи с заданным Id.
+ * @param $con
+ * @param $taskId
+ * @return bool
+ */
 function taskExist($con, $taskId)
 {
     $sql = sprintf("SELECT COUNT(*) as tasksCount FROM tasks WHERE id=%d", $taskId);
@@ -155,6 +161,12 @@ function taskExist($con, $taskId)
     return $tasksCount > 0;
 }
 
+/**
+ * Устанавливает статус задачи.
+ * @param $con
+ * @param $taskId
+ * @param $taskStatus
+ */
 function setTaskStatus($con, $taskId, $taskStatus)
 {
     $sql = 'UPDATE tasks set completed=? where id=?';
@@ -198,6 +210,13 @@ function userExists($con, $username)
 
     return $usersCount > 0;
 }
+
+/**
+ * Проверяет существование пользователя с данным  email.
+ * @param $con
+ * @param $email
+ * @return bool
+ */
 function userWithEmailExists($con, $email)
 {
     $sql = sprintf("SELECT COUNT(*) as usersCount FROM users WHERE email = '%s'",
@@ -245,6 +264,11 @@ function projectTaskCount($con)
     return $result;
 }
 
+/**
+ * Фоормирует список переменных для основного шаблона.
+ * @param $con
+ * @return array
+ */
 function layoutVars($con)
 {
     $projectTaskCount = projectTaskCount($con);
