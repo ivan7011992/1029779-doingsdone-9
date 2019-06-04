@@ -138,6 +138,7 @@ function projectWithNameExists($con, $projectName)
     return $projectsCount > 0;
 }
 
+
 function taskExist($con, $taskId)
 {
     $sql = sprintf("SELECT COUNT(*) as tasksCount FROM tasks WHERE id=%d", $taskId);
