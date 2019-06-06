@@ -272,14 +272,20 @@ function projectTaskCount($con,$userId)
 function layoutVars($con)
 {
 
-    $projectTaskCount = projectTaskCount($con, $_SESSION ['user']['id']);
-    $projects = getProjects($con, $_SESSION ['user']['id']);
+    if(isset($_SESSION['user'])) {
+        $projectTaskCount = projectTaskCount($con, $_SESSION ['user']['id']);
+        $projects = getProjects($con, $_SESSION ['user']['id']);
+
+        return [
+            'logged' => array_key_exists('user', $_SESSION),
+            'user' => $_SESSION['user'] ?? null,
+            'projects' => $projects,
+            'projectTaskCount' => $projectTaskCount,
+        ];
+    }
 
     return [
-        'logged' => array_key_exists('user', $_SESSION),
-        'user' => $_SESSION['user'] ?? null,
-        'projects' => $projects,
-        'projectTaskCount' => $projectTaskCount,
+        'logged' => false
     ];
 }
 
