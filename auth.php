@@ -2,6 +2,12 @@
 require_once('init.php');
 require_once('db.php');
 
+/**
+ *
+ * Валидация формы авторизиции.
+ * @param $con
+ * @return array
+ */
 function checkErrorsAuth($con)
 {
     $errors = [];
@@ -16,6 +22,12 @@ function checkErrorsAuth($con)
     return $errors;
 }
 
+/**
+ * Получение  пользователя с заданным email.
+ * @param $con
+ * @param $email
+ * @return |null
+ */
 function getUser($con, $email)
 {
     $sql = sprintf("SELECT * FROM users WHERE email = '%s'", $email);
@@ -37,6 +49,11 @@ function getUser($con, $email)
     }
 }
 
+/**
+ * Расширенная проверка авторизации пользователя.
+ * @param $con
+ * @return array
+ */
 function checkAuth($con)
 {
     $errors = checkErrorsAuth($con);

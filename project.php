@@ -5,6 +5,11 @@ require_once('db.php');
 
 session_start();
 
+/**
+ * Валидация формы добавления проекта.
+ * @param $con
+ * @return array
+ */
 function checkErrorsProject($con)
 {
 

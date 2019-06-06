@@ -5,6 +5,11 @@ require_once('db.php');
 
 session_start();
 
+/**
+ * Валидация формы при добавлении задачи.
+ * @param $con
+ * @return array
+ */
 function checkErrors($con)
 {
     $errors = [];

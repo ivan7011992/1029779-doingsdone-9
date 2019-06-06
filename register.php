@@ -3,6 +3,11 @@ require_once('init.php');
 require_once('db.php');
 
 
+/**
+ * Валидация формы регистрации пользователя.
+ * @param $con
+ * @return array
+ */
 function checkErrorsReg($con)
 {
     $errors = [];
