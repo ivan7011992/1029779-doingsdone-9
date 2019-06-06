@@ -3,11 +3,12 @@
  *
  * Получить все проекты.
  * @param $con Подключение к БД
+ * @param $userId
  * @return array Проекты
  */
-function getProjects($con)
+function getProjects($con,$userId)
 {
-    $sql = "SELECT * FROM projects ";
+    $sql = "SELECT * FROM projects where user_id = $userId";
 
     $result = mysqli_query($con, $sql);
     if (!$result) {
@@ -91,7 +92,7 @@ function getTasks($con, array $criteria = [])
 
 /**
  *
- * Проверка существования проекта
+ * Проверка существования проекта.
  * @param $con Подкючение к БД
  * @param $projectId Идентификатор проета
  * @return bool Проект есть или нет
@@ -235,15 +236,17 @@ function userWithEmailExists($con, $email)
 
     return $usersCount > 0;
 }
+
 /**
  * Количество задач для проекта
  *
  * @param $con
+ * @param $userId
  * @return array|bool|mysqli_result Возращает массив с результатом выполнения запроса
  */
-function projectTaskCount($con)
+function projectTaskCount($con,$userId)
 {
-    $sql = "select project_id, COUNT(*) as tasksCount from tasks GROUP BY project_id;";
+    $sql = "select project_id, COUNT(*) as tasksCount from tasks where user_id = $userId GROUP BY project_id;";
 
     $result = mysqli_query($con, $sql);
 
@@ -268,8 +271,9 @@ function projectTaskCount($con)
  */
 function layoutVars($con)
 {
-    $projectTaskCount = projectTaskCount($con);
-    $projects = getProjects($con);
+
+    $projectTaskCount = projectTaskCount($con, $_SESSION ['user']['id']);
+    $projects = getProjects($con, $_SESSION ['user']['id']);
 
     return [
         'logged' => array_key_exists('user', $_SESSION),

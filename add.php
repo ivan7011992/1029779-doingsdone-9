@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $content = include_template('add.php', [
     'errors' => $errors,
     'form_data' => $_POST,
-    'projects' => getProjects($con),
+    'projects' => getProjects($con, $_SESSION['user']['id']),
 ]);
 
 

@@ -29,11 +29,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (count($errors) === 0) {
         $name = trim($_POST['name']);
 
-        $sql = "INSERT INTO projects (name) VALUES (?)";
+        $sql = "INSERT INTO projects (name,user_id) VALUES (?,?)";
         $stmt = db_get_prepare_stmt($con, $sql, [
-            $name,
+            $name, $_SESSION['user']['id']
         ]);
         $insertResult = mysqli_stmt_execute($stmt);
+
+        if (!$insertResult) {
+            $error = mysqli_error($con);
+            echo "Ошибка MySQL:" . $error;
+            die;
+        }
 
         header("Location: /index.php", true, 301);
         exit();
