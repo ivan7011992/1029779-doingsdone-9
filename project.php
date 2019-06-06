@@ -48,7 +48,6 @@ $content = include_template('project.php', [
 
 $layout = include_template('layout.php', array_merge([
     'title' => 'Иван Васильев',
-    'projectId' => $projectId,
     'content' => $content,
 ], layoutVars($con)));
 
