@@ -3,13 +3,37 @@ DROP DATABASE IF EXISTS things;
 CREATE DATABASE things;
 
 USE things;
+
+CREATE TABLE users(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	username VARCHAR(100),
+	data_regist DATE,
+	email VARCHAR(100),
+	password VARCHAR(100)
+);
+
+INSERT INTO users (id,username, data_regist, email, password)
+VALUES 	(1, 'Иван', '2019-01-01', 'ivan@mail.ru', '123456'),
+		(2, 'Алексей', '2019-01-02', 'alex@mail.ru', '123456'),
+		(3, 'Степан', '2019-01-03', 'step@mail.ru', '123456'),
+		(4, 'Сергей', '2019-01-04', 'serg@mail.ru', '123456'),
+		(5, 'Григорий', '2019-01-05', 'grig@mail.ru', '123456');
+
 	 
 CREATE TABLE projects (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR (200)
 );
-INSERT INTO projects (name)
-VALUES ('Входящие'),  ('Учеба'),  ('Работа'),  ('Домашние дела'),  ('Авто');
+alter table projects
+	add user_id int not null;
+
+INSERT INTO projects (user_id,name)
+VALUES (4, 'Входящие'),
+       (4, 'Учеба'),
+       (1, 'Работа'),
+       (1, 'Домашние дела'),
+       (2, 'Авто');
+
 
 CREATE TABLE tasks (
 	id INT AUTO_INCREMENT PRIMARY KEY,
@@ -30,21 +54,7 @@ VALUES ('3', '1', 'Собеседование в IT-компании', 'Home.psd
        ('4', '5', 'Купить корм для кота', 'Home.psd', '2019-01-01', '0', null),
        ('4', '6', 'Заказать пиццу', 'Home.psd', '2019-01-01', '0', null);
 
-CREATE TABLE users(
-	id INT AUTO_INCREMENT PRIMARY KEY,
-	username VARCHAR(100),
-	data_regist DATE,
-	email VARCHAR(100),
-	password VARCHAR(100)
-);
 
-INSERT INTO users (username, data_regist, email, password)
-VALUES 	('Иван', '2019-01-01', 'ivan@mail.ru', '123456'),
-		('Алексей', '2019-01-02', 'alex@mail.ru', '123456'),
-		('Степан', '2019-01-03', 'step@mail.ru', '123456'),
-		('Сергей', '2019-01-04', 'serg@mail.ru', '123456'),
-		('Григорий', '2019-01-05', 'grig@mail.ru', '123456');
-
-CREATE FULLTEXT INDEX text_search ON tasks(name); 
+CREATE FULLTEXT INDEX text_search ON tasks(name);
 
 

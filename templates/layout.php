@@ -36,7 +36,7 @@
                     <div class="main-header__side-item user-menu">
                         <div class="user-menu__data">
 
-                            <p><?= $user ['username']?></p>
+                            <p><?= $user ['username'] ?></p>
 
                             <a href="/logout.php">Выйти</a>
                         </div>
@@ -61,7 +61,7 @@
                                 <li class="main-navigation__list-item">
                                     <a class="main-navigation__list-item-link
                                 <?php if ($projectId === (int)$category['id']): ?>main-navigation__list-item--active <?php endif ?>"
-                                       href="?project_id=<?= $category['id'] ?>"><?= esc($category['name']) ?></a>
+                                       href="/index.php?project_id=<?= $category['id'] ?>"><?= esc($category['name']) ?></a>
                                     <span class="main-navigation__list-item-count">
                                     <?php if (array_key_exists($category['id'], $projectTaskCount)): ?>
                                         <?= $projectTaskCount[$category['id']] ?>

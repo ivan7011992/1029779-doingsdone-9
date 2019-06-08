@@ -17,7 +17,9 @@ if (!empty($_GET['task_id']) && !empty($_GET['check'])) {
 }
 
 $criteria = [];
-
+if (!empty($_SESSION['user'])) {
+    $criteria['user_id'] = $_SESSION['user']['id'];
+}
 $filterByDate = null;
 if (!empty($_GET['filter-by-date'])) {
     $filterByDate = (int)$_GET['filter-by-date'];
