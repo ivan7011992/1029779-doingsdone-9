@@ -58,7 +58,7 @@
             <td class="task__file">
                 <a class="download-link" href="/uploads/<?= $task['dowloads'] ?>"><?= $task['dowloads'] ?></a>
             </td>
-            <td class="task__date"><?= $task['date_start'] ?></td>
+            <td class="task__date"><?= $task['date_term'] ?></td>
             </tr>
         <?php elseif ($task['completed'] === '1'): ?>
             <tr class="tasks__item task task--completed">
