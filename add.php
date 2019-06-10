@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!empty($_FILES['file']['name'])) {
             $fileName = $_FILES['file']['name'];
             rename($_FILES['file']['tmp_name'], './uploads/' . $fileName);
-                  }
+        }
 
         $name = $_POST['name'];
         $project_id = $_POST['project'];
