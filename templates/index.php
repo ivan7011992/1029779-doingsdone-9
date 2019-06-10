@@ -68,7 +68,7 @@
                         <span class="checkbox__text"><?= $task['name'] ?></span>
                     </label>
                 </td>
-                <td class="task__date"><?= $task['date_start'] ?></td>
+                <td class="task__date"><?= $task['date_term'] ?></td>
                 <td class="task__controls"></td>
             </tr>
         <?php endif ?>
