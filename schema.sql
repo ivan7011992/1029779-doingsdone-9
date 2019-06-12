@@ -7,7 +7,7 @@ USE things;
 CREATE TABLE users(
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	username VARCHAR(100),
-	data_regist DATE,
+	data_regist DATETIME,
 	email VARCHAR(100),
 	password VARCHAR(100)
 );
@@ -19,7 +19,7 @@ VALUES 	(1, 'Иван', '2019-01-01', 'ivan@mail.ru', '123456'),
 		(4, 'Сергей', '2019-01-04', 'serg@mail.ru', '123456'),
 		(5, 'Григорий', '2019-01-05', 'grig@mail.ru', '123456');
 
-	 
+
 CREATE TABLE projects (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR (200)
@@ -41,7 +41,7 @@ CREATE TABLE tasks (
 	user_id INT(100),
 	name VARCHAR (200),
 	dowloads VARCHAR(100),
-	date_start DATE,
+	date_start DATETIME,
 	completed BOOL,
 	date_term DATE
 );
@@ -52,7 +52,7 @@ VALUES ('3', '1', 'Собеседование в IT-компании', 'Home.psd
        ('2', '3', 'Сделать задание первого раздела','Home.psd', '2019-01-01', '1', '2019-12-21'),
        ('1', '4', 'Встреча с другом', 'Home.psd', '2019-01-01', '0', '2018-12-22'),
        ('4', '5', 'Купить корм для кота', 'Home.psd', '2019-01-01', '0', null);
-      
+
 
 
 CREATE FULLTEXT INDEX text_search ON tasks(name);
