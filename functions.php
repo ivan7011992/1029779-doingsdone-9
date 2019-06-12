@@ -1,24 +1,5 @@
 <?php
 
-/**
- * Количество задач для данного проекта.
- * @param array $tasks Задачи
- * @param array $projectrow Список проектов
- * @return int
- */
-function count_task(array $tasks, array $projectrow): int
-{
-    $counter = 0;
-    $project_id = $projectrow['id'];
-
-    foreach ($tasks as $task) {
-        if ($project_id === $task['project_id']) {
-            $counter++;
-        }
-    }
-
-    return $counter;
-}
 
 /**
  * Проверить,осталось меньше 24 часов до даты.
@@ -30,7 +11,7 @@ function check_date(string $date): bool
     $moment = strtotime($date);
     $now = time();
 
-    $seconds = $now - $moment;
+    $seconds = $moment - $now;
     $hours = floor($seconds / 3600);
 
     return $hours <= 24;

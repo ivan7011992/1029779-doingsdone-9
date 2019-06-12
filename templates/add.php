@@ -12,6 +12,7 @@
 
         <input class="form__input <?php if (array_key_exists('name', $errors)): ?> form__input--error <?php endif ?>"
                type="text" name="name" id="name"
+               required="required"
                value="<?php if (!empty($form_data['name'])) echo $form_data['name'] ?>"
                placeholder="Введите название">
         <?php if (array_key_exists('name', $errors)) : ?>
@@ -28,7 +29,7 @@
                         <?php if (array_key_exists('project', $errors)): ?> form__input--error <?php endif ?>"
                 name="project" id="project">
             <?php foreach ($projects as $project): ?>
-                <option value="<?= $project['id'] ?>"><?= $project['name'] ?></option>
+                <option value="<?= $project['id'] ?>"><?= esc($project['name']) ?></option>
             <?php endforeach ?>
         </select>
 
@@ -43,7 +44,7 @@
         <label class="form__label" for="date">Дата выполнения</label>
 
         <input class="form__input form__input--date <?php if (array_key_exists('date', $errors)): ?> form__input--error <?php endif ?>"
-               type="text" name="date" id="date" value=""
+               type="text" name="date" id="date" value="<?= $form_data['date'] ?? '' ?>"
                placeholder="Введите дату в формате ГГГГ-ММ-ДД">
 
         <?php if (array_key_exists('date', $errors)) : ?>

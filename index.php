@@ -7,7 +7,26 @@ require_once('db.php');
 
 session_start();
 
+if (!isset($_SESSION['user'])) {
+    $content = include_template('index.php', [
+    ]);
+
+
+    $layout = include_template('layout.php', array_merge([
+        'title' => 'Иван Васильев',
+        'content' => $content,
+    ], layoutVars($con)));
+
+    echo $layout;
+    return;
+}
+
+
 if (!empty($_GET['task_id']) && !empty($_GET['check'])) {
+    $check = (int)$_GET['check'];
+    if ($check !== 0 || $check !== 1) {
+        die();
+    }
     if (!taskExist($con, $_GET['task_id'])) {
         http_response_code(404);
         die();
@@ -15,6 +34,7 @@ if (!empty($_GET['task_id']) && !empty($_GET['check'])) {
 
     setTaskStatus($con, $_GET['task_id'], $_GET['check']);
 }
+
 
 $criteria = [];
 if (!empty($_SESSION['user'])) {
@@ -49,6 +69,8 @@ if (!empty($_GET['project_id'])) {
 
     }
 }
+
+
 
 $search = $_GET ['search'] ?? '';
 if (!empty($search)) {

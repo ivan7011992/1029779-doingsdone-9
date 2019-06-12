@@ -14,7 +14,7 @@ function checkErrors($con)
 {
     $errors = [];
 
-    if (empty($_POST['name'])) {
+    if (empty( trim($_POST['name']))) {
         $errors['name'] = 'Название должно быть непусто';
     }
 
@@ -33,7 +33,9 @@ function checkErrors($con)
         if (!is_date_valid($_POST['date'])) {
             $errors['date'] = 'Неверный формат даты';
         } else {
-            if (strtotime($_POST['date']) < '') {
+            $currentDate = new \DateTime();
+            $formattedDate = $currentDate->format('Y-m-d');
+            if ($_POST['date'] < $formattedDate) {
                 $errors['date'] = 'Дата должна быть больше или равна текущей';
             }
         }

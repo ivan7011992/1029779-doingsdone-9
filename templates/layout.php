@@ -36,7 +36,7 @@
                     <div class="main-header__side-item user-menu">
                         <div class="user-menu__data">
 
-                            <p><?= $user ['username'] ?></p>
+                            <p><?= esc($user['username']) ?></p>
 
                             <a href="/logout.php">Выйти</a>
                         </div>

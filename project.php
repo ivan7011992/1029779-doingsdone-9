@@ -27,6 +27,10 @@ function checkErrorsProject($con)
     return $errors;
 }
 
+if (!isset($_SESSION['user'])) {
+    header("Location: /index.php", true, 301);
+}
+
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = checkErrorsProject($con);
