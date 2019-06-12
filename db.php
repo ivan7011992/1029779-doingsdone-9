@@ -15,11 +15,11 @@ function getProjects($con, $userId)
         $error = mysqli_error($con);
         echo "Ошибка MySQL:" . $error;
         die;
-    } else {
+    }
         $results = mysqli_fetch_all($result, MYSQLI_ASSOC);
         $categories = [];
 
-    }
+
 
     foreach ($results as $result) {
         $categories[] = $result;
