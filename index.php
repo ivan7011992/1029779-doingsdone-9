@@ -7,19 +7,8 @@ require_once('db.php');
 
 session_start();
 
-if (!isset($_SESSION['user'])) {
-    $content = include_template('index.php', [
-    ]);
 
 
-    $layout = include_template('layout.php', array_merge([
-        'title' => 'Иван Васильев',
-        'content' => $content,
-    ], layoutVars($con)));
-
-    echo $layout;
-    return;
-}
 
 
 if (!empty($_GET['task_id']) && !empty($_GET['check'])) {
@@ -78,15 +67,17 @@ if (!empty($search)) {
 }
 
 $tasks = getTasks($con, $criteria);
+$content = '';
+if (isset($_SESSION['user'])) {
+    $content = include_template('index.php', [
+        'tasks' => $tasks,
+        'projectId' => $projectId,
+        'filterByDate' => $filterByDate,
+        'showComplete' => $showComplete,
+        'search' => $search,
+    ]);
 
-
-$content = include_template('index.php', [
-    'tasks' => $tasks,
-    'projectId' => $projectId,
-    'filterByDate' => $filterByDate,
-    'showComplete' => $showComplete,
-    'search' => $search,
-]);
+}
 
 
 $layout = include_template('layout.php', array_merge([

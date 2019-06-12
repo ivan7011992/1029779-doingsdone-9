@@ -1,6 +1,7 @@
 <?php
 /** @var array $tasks */
 
+
 ?>
 <h2 class="content__main-heading">Список задач</h2>
 
@@ -11,6 +12,7 @@
            placeholder="Поиск по задачам">
     <input class="search-form__submit" type="submit" name="" value="Искать">
 </form>
+
 
 <div class="tasks-controls">
     <nav class="tasks-switch">
