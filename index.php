@@ -24,7 +24,7 @@ if (!isset($_SESSION['user'])) {
 
 if (!empty($_GET['task_id']) && !empty($_GET['check'])) {
     $check = (int)$_GET['check'];
-    if ($check !== 0 || $check !== 1) {
+    if ($check !== 0 &&  $check !== 1) {
         die();
     }
     if (!taskExist($con, $_GET['task_id'])) {
