@@ -24,4 +24,7 @@ $dompdf->render();
 // Output the generated PDF to Browser
 $output = $dompdf->output();
 
-file_put_contents('output.pdf', $output);
+header("Content-type: application/pdf");
+header("Content-Disposition: inline; filename=filename.pdf");
+
+echo $output;
