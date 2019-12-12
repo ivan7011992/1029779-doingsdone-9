@@ -41,6 +41,13 @@
 
         }
 
+
+
+        .table3 td{
+
+            border: 1px solid black;
+        }
+
         th {
             border: 1px solid black;
         }
@@ -104,11 +111,7 @@
             text-align: left;
         }
 
-        .table3 {
-            width: 54%;
-            margin: 0px;
-            display: inline-block;
-        }
+
 
         .block4 {
             width: 352px;
@@ -120,12 +123,18 @@
         }
 
         .table4 {
-            width: 106%;
+            width: 50%;
+
         }
         .table4 td {
 
             border: 1px solid black;
         }
+        .table3 td{
+
+            border: 1px solid black;
+        }
+
 
         table.no-border {
             border-width: 0;
@@ -133,6 +142,12 @@
         /*table.no-border td,th{*/
         /*    border-width: 0;*/
         /*}*/
+        .block-4{
+            position: absolute;
+
+            width: 50%;
+
+        }
     </style>
 </head>
 <body>
@@ -177,7 +192,7 @@
         <td width="50%">
             <h3> 2.Информация для внесения платы получателю платежа (получателям платежей)</h3>
 
-            <table class="table2" style="border: 2px solid black " >
+            <table class="table2" style="border: 1px solid black " >
                 <tr>
                     <th>Наименование получателя платежа</th>
                     <th>Номер банковского счета и банковские реквизиты</th>
@@ -235,11 +250,131 @@
         </td>
     </tr>
 
+    <tr>
+        <td style="font-size: 8px"  >
+
+            <h3 >Расчёт размера платы коммунальные услуги</h3>
+
+
+            <table class ="table3" >
+                <tr>
+                    <th colspan = "2" rowspan ="2" >Виды услуг</th>
+                    <th rowspan ="2">Ед. изм</th>
+                    <th colspan = "2" >Объем коммун. услуг</th>
+                    <th rowspan = "2">Тариф </th>
+                    <th colspan = "2"> Размер платы за коммун.услуги </th>
+                    <th   rowspan ="2"> Всего начисл. за период </th>
+                    <th  rowspan ="2"> Перерасчеты всего, руб.</th>
+                    <th  rowspan ="2">Размер повышающего коэфициента</th>
+                    <th colspan ="3"> Итого к оплате за расчетный период, руб.</th>
+
+
+                </tr>
+                <tr>
+
+                    <td>индив. потреб.</td>
+                    <td>общедом. нужды</td>
+                    <td> индив. потреб.</td>
+                    <td> общедом. нужды</td>
+                    <td> всего </td>
+                    <td> индив. потреб </td>
+                    <td> общедом .нужды </td>
+
+                </tr>
+                <tr>
+                    <td colspan = "2" >1 </td>
+                    <td>2 </td>
+                    <td>3 </td>
+                    <td>4 </td>
+                    <td>5 </td>
+                    <td>6 </td>
+                    <td>7 </td>
+                    <td>8 </td>
+                    <td>9 </td>
+                    <td>10 </td>
+                    <td>11 </td>
+                    <td>12 </td>
+                    <td>13 </td>
+                </tr>
+
+                <tr style = "height: 40px" >
+                    <td colspan = "2" > - </td>
+                    <td>- </td>
+                    <td> м(3). </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+
+                </tr>
+
+                <tr>
+                    <td colspan = "2" > - </td>
+                    <td>- </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+
+                </tr>
+                <tr >
+                    <td colspan = "2" > </td>
+                    <td>- </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+
+                </tr>
+                <tr >
+                    <td colspan = "2" > </td>
+                    <td> 999999999999999 </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td> - </td>
+
+                </tr>
+
+
+            </table>
+
+        </td>
 
 
 
-<tr>
-    <td width ="50%">
+
+
+
+    <td class = "block-4"  >
+
    <h3 >Справочная информация</h3>
 
 
