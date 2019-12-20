@@ -91,5 +91,16 @@ return array(
             'bold_italic' => $distFontDir . 'DejaVuSerif-BoldItalic',
             'italic' => $distFontDir . 'DejaVuSerif-Italic',
             'normal' => $distFontDir . 'DejaVuSerif'
-        )
+        ),
+    'times' =>
+        array('normal' => DOMPDF_FONT_DIR . 'times',
+            'bold' => DOMPDF_FONT_DIR . 'timesbd',
+            'italic' => DOMPDF_FONT_DIR . 'timesi',
+            'bold_italic' => DOMPDF_FONT_DIR . 'timesbi'),
+    'times-roman' =>
+        array('normal' => DOMPDF_FONT_DIR . 'times',
+            'bold' => DOMPDF_FONT_DIR . 'timesbd',
+            'italic' => DOMPDF_FONT_DIR . 'timesi',
+            'bold_italic' => DOMPDF_FONT_DIR . 'timesbi')
+
 );

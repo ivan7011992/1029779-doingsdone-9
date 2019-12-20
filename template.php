@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
         body {
             font-family: DejaVu Sans;
             font-size: 8px;
+
         }
 
         h1 {
@@ -63,6 +65,8 @@
             width: 30%;
         }
 
+
+
         .list {
             /*float: left;*/
             /*margin: 0 -18px;*/
@@ -82,8 +86,8 @@
             background: white;
             color: black;
             width: 100%;
-            font-size: 8px;
-            margin-top: 100px;
+            font-size: 9px;
+            margin-top: 80px;
         }
 
         .block1 {
@@ -134,7 +138,13 @@
 
             border: 1px solid black;
         }
+        .table3 th{
 
+            padding-left: 0px;
+
+
+
+        }
 
         .no-border {
             border-width: 0!important;
@@ -146,7 +156,7 @@
 <body>
 
 <div>
-    <h1> ЕДИНЫЙ ПЛАТЕЖНЫЙ ДОКУМЕНТ по л/с #kod за #date </h1>
+    <h1> ЕДИНЫЙ ПЛАТЕЖНЫЙ ДОКУМЕНТ по л/с <?= $kod ?> за <?= $date ?> </h1>
     <h2> для внесения платы за предоставленные коммунальные услуги </h2>
 </div>
 
@@ -156,19 +166,19 @@
             <h3>Раздел 1. Сведения о плательщике и исполнителе услуг </h3>
             <p style="border: 1px solid black;
              font-size: 8px!important; padding: 5px;">
-                За #date____________(расчетный период)
+                За <?= $date ?>  (расчетный период)
                 <br>
                 Ф.И.О. (наименование) плательщика собственника/нанимателя:
                 <br>
-                #fio
+                <?= $FIO ?? ''?>
                 <br>
-                Адрес помещения: #adres
+                Адрес помещения: <?= $ADDRESS ?? ''?>
                 <br>
-                Площадь помещения: #s
+                Площадь помещения:
                 <br>
-                Количество проживающих: #count_p чел.
+                Количество проживающих: <?= $countTenants ?? '' ?> чел.
                 <br>
-                Организация – исполнитель услуг: МУП Г.НОВОСИБИРСКА «ГОРВОДОКАНАЛ»¬¬
+                Организация – исполнитель услуг: МУП Г.НОВОСИБИРСКА «ГОРВОДОКАНАЛ»
                 <br>
                 ИНН 5411100875 КПП 540701001
                 <br>
@@ -204,8 +214,8 @@
                         Сибирский банк ПАО Сбербанк
                         К/С 30101810500000000641
                     </td>
-                    <td style="border: 1px solid black">#ls</td>
-                    <td style="border: 1px solid black"> #itog_all</td>
+                    <td style="border: 1px solid black"><?= $kod ?></td>
+                    <td style="border: 1px solid black"> <?=$SUMMA_ALL?> </td>
                 </tr>
                 <tr>
                     <td colspan="4" style="border: 1px solid black">
@@ -230,18 +240,18 @@
                                     <br>
                                 </td>
 
-                                <td class="no-border">
-                                    <li>:#sum_dolg руб.</li>
+                                <td class="no-border" style="margin-left: 10px">
+                                    <li style=" margin-left: 19px"><?=$DEPT?></li>
                                     <br>
-                                    <li>:#sum_avans руб.</li>
+                                    <li style=" margin-left: 19px"><?=$OVERPAY?></li>
                                     <br>
-                                    <li> :#date_last_opl</li>
+                                    <li style=" margin-left: 19px"><?=$DATE?></li>
                                     <br>
-                                    <li> #sum_oplat руб</li>
+                                    <li style=" margin-left:19px"><?=$SUMMA_OPLAT?> </li>
                                     <br>
-                                    <li> #itog_all руб.</li>
+                                    <li style=" margin-left: 19px"><?=$SUMMA_ALL?> </li>
                                     <br>
-                                    <li>#gosp руб.</li>
+                                    <li style=" margin-left: 19px"><?=$GOSP?></li>
                                     <br>
                                 </td>
 
@@ -255,16 +265,15 @@
     </tr>
 </table>
 
-<table
+<table>
     <tr>
         <td style="font-size: 8px">
 
             <h3>Расчёт размера платы коммунальные услуги</h3>
 
-
             <table class="table3">
                 <tr>
-                    <th colspan="2" rowspan="2">Виды услуг</th>
+                    <th colspan="2" rowspan="2" Виды услуг</th>
                     <th rowspan="2">Ед. изм</th>
                     <th colspan="2">Объем коммун. услуг</th>
                     <th rowspan="2">Тариф</th>
@@ -304,9 +313,9 @@
                 </tr>
 
                 <tr style="height: 40px">
-                    <td colspan="2"> -</td>
-                    <td>-</td>
-                    <td> м(3).</td>
+                    <td colspan="2">Холодное водоснабжение</td>
+                    <td>м(3)</td>
+                    <td> </td>
                     <td> -</td>
                     <td> -</td>
                     <td> -</td>
@@ -321,7 +330,23 @@
                 </tr>
 
                 <tr>
-                    <td colspan="2"> -</td>
+                    <td colspan="2"> Водоотведение</td>
+                    <td>м(3)</td>
+                    <td> -</td>
+                    <td> -</td>
+                    <td> -</td>
+                    <td> -</td>
+                    <td> -</td>
+                    <td> -</td>
+                    <td> -</td>
+                    <td> -</td>
+                    <td> -</td>
+                    <td> -</td>
+                    <td> -</td>
+
+                </tr>
+                <tr>
+                    <td colspan="2" >Итого по всем услугам</td>
                     <td>-</td>
                     <td> -</td>
                     <td> -</td>
@@ -338,23 +363,7 @@
                 </tr>
                 <tr>
                     <td colspan="2"></td>
-                    <td>-</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-
-                </tr>
-                <tr>
-                    <td colspan="2"></td>
-                    <td> 999999999999999</td>
+                    <td> 99</td>
                     <td> -</td>
                     <td> -</td>
                     <td> -</td>
@@ -389,11 +398,20 @@
                     <td> Дата показаний</td>
                     <td> Показания ПУ</td>
                 </tr>
+                <?php foreach ($vodomers as $vodomer): ?>
                 <tr>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
+
+
+                    <td> <?= $vodomer['N_VODOMER']  ?></td>
+
+
+                    <td> <?= $vodomer['VOD']  ?></td>
+
+
+                    <td> <?= $vodomer['POKAZ']  ?></td>
+
                 </tr>
+                <?php endforeach; ?>
             </table>
 
         </td>
