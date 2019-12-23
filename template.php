@@ -156,7 +156,7 @@
 <body>
 
 <div>
-    <h1> ЕДИНЫЙ ПЛАТЕЖНЫЙ ДОКУМЕНТ по л/с <?= $kod ?> за <?= $date ?> </h1>
+    <h1> ЕДИНЫЙ ПЛАТЕЖНЫЙ ДОКУМЕНТ по л/с <?= $kod ?? '' ?> за <?= $date ?? ''?> </h1>
     <h2> для внесения платы за предоставленные коммунальные услуги </h2>
 </div>
 
@@ -166,11 +166,11 @@
             <h3>Раздел 1. Сведения о плательщике и исполнителе услуг </h3>
             <p style="border: 1px solid black;
              font-size: 8px!important; padding: 5px;">
-                За <?= $date ?>  (расчетный период)
+                За <?=$date ?? '' ?>  (расчетный период)
                 <br>
                 Ф.И.О. (наименование) плательщика собственника/нанимателя:
                 <br>
-                <?= $FIO ?? ''?>
+                <?=$FIO ?? ''?>
                 <br>
                 Адрес помещения: <?= $ADDRESS ?? ''?>
                 <br>
@@ -273,7 +273,7 @@
 
             <table class="table3">
                 <tr>
-                    <th colspan="2" rowspan="2" Виды услуг</th>
+                    <th colspan="2" rowspan="2"> Виды услуг</th>
                     <th rowspan="2">Ед. изм</th>
                     <th colspan="2">Объем коммун. услуг</th>
                     <th rowspan="2">Тариф</th>
@@ -311,73 +311,30 @@
                     <td>12</td>
                     <td>13</td>
                 </tr>
+                <?php foreach ($table3 as $table) {
+                    $ALL = $table['SUMMA_PERER']+ $table['SUM_POVISH'] + $table['SUM_ODN'] + $table['VSEGO_NACHIS'];
+                    $INDIV_CONSUMPTION = $table['SUMMA_PERER'] + $table['SUM_POVISH'] + $table['VSEGO_NACHIS'] - $table['IS_POVISH_ODN'];
+                    $COMMON_HOUSE_NEEDS =  $table['SUM_ODN'] +  $table['IS_POVISH_ODN'];
+                ?>
 
                 <tr style="height: 40px">
-                    <td colspan="2">Холодное водоснабжение</td>
+                    <td colspan="2"><?= $table['USL'] ?></td>
                     <td>м(3)</td>
-                    <td> </td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
+                    <td><?=$table['VOL']?> </td>
+                    <td> <?=$table['VOLUME_ODN']?></td>
+                    <td><?= $table['TARIF'] ?> </td>
+                    <td><?= $table['VSEGO_NACHIS']?></td>
+                    <td><?= $table['SUM_ODN']?></td>
+                    <td><?= $table1=$table['VSEGO_NACHIS'] + $table['SUM_ODN'] ?></td>
+                    <td><?= $table['SUMMA_PERER']?></td>
+                    <td><?= $table['SUM_POVISH'] ?></td>
+                    <td><?=  $ALL ?></td>
+                    <td><?=  $INDIV_CONSUMPTION ?></td>
+                    <td><?=  $COMMON_HOUSE_NEEDS ?></td>
 
                 </tr>
 
-                <tr>
-                    <td colspan="2"> Водоотведение</td>
-                    <td>м(3)</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-
-                </tr>
-                <tr>
-                    <td colspan="2" >Итого по всем услугам</td>
-                    <td>-</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-
-                </tr>
-                <tr>
-                    <td colspan="2"></td>
-                    <td> 99</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-                    <td> -</td>
-
-                </tr>
-
+                <?php } ?>
 
             </table>
 
