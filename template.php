@@ -1,3 +1,6 @@
+<?php
+$end = end($table3);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,7 +82,7 @@
         }
 
         #footer {
-            /*	position: fixed;*/
+            	position: absolute;
             left: 0;
             bottom: 0;
             padding: 10px;
@@ -87,7 +90,7 @@
             color: black;
             width: 100%;
             font-size: 9px;
-            margin-top: 80px;
+
         }
 
         .block1 {
@@ -150,13 +153,17 @@
             border-width: 0!important;
         }
 
+        table.table3 tr td {
+            padding: 5px;
+        }
+
 
     </style>
 </head>
 <body>
 
 <div>
-    <h1> ЕДИНЫЙ ПЛАТЕЖНЫЙ ДОКУМЕНТ по л/с <?= $kod ?? '' ?> за <?= $date ?? ''?> тест <?= $usl ?? '' ?> </h1>
+    <h1> ЕДИНЫЙ ПЛАТЕЖНЫЙ ДОКУМЕНТ по л/с <?= $kod ?? '' ?> за <?= $date ?? ''?>  </h1>
     <h2> для внесения платы за предоставленные коммунальные услуги </h2>
 </div>
 
@@ -174,7 +181,7 @@
                 <br>
                 Адрес помещения: <?= $ADDRESS ?? ''?>
                 <br>
-                Площадь помещения:
+                Площадь помещения: <?= $S ?? '' ?>
                 <br>
                 Количество проживающих: <?= $countTenants ?? '' ?> чел.
                 <br>
@@ -215,7 +222,7 @@
                         К/С 30101810500000000641
                     </td>
                     <td style="border: 1px solid black"><?= $kod ?></td>
-                    <td style="border: 1px solid black"> <?=$SUMMA_ALL?> </td>
+                    <td style="border: 1px solid black"> <?=$ALL = $end['VSEGO_NACHIS'] + $table3[0]['SUM_ODN'] +  $table3[0]['SALDO_PRED'] -  $table3[0]['SUMMA_OPLAT'] ?> </td>
                 </tr>
                 <tr>
                     <td colspan="4" style="border: 1px solid black">
@@ -245,12 +252,14 @@
                                     <br>
                                     <li style=" margin-left: 19px"><?=$OVERPAY?></li>
                                     <br>
-                                    <li style=" margin-left: 19px"><?=$DATE?></li>
+                                    <li style=" margin-left: 19px"><?=date('d-m-Y', strtotime($DATE))?></li>
                                     <br>
                                     <li style=" margin-left:19px"><?=$SUMMA_OPLAT?> </li>
                                     <br>
-                                    <li style=" margin-left: 19px"><?=$SUMMA_ALL?> </li>
+
+                                    <li style=" margin-left: 19px"><?=$ALL = $end['VSEGO_NACHIS'] + $table3[0]['SUM_ODN'] + $end['SUM_POVISH']+ $table3[0]['SALDO_PRED']  -  $table3[0]['SUMMA_OPLAT'] ?></li>
                                     <br>
+
                                     <li style=" margin-left: 19px"><?=$GOSP?></li>
                                     <br>
                                 </td>
@@ -297,7 +306,7 @@
 
                 </tr>
                 <tr>
-                    <td colspan="2">1</td>
+                    <td colspan="2" class="pl">1</td>
                     <td>2</td>
                     <td>3</td>
                     <td>4</td>
@@ -351,7 +360,7 @@
                     <th colspan="3"> Текущие показания приборов учета</th>
                 </tr>
                 <tr>
-                    <td> Номер ПУ</td>
+                    <td style="white-space: nowrap"> Номер ПУ</td>
                     <td> Дата показаний</td>
                     <td> Показания ПУ</td>
                 </tr>
@@ -362,13 +371,20 @@
                     <td> <?= $vodomer['N_VODOMER']  ?></td>
 
 
-                    <td> <?= $vodomer['VOD']  ?></td>
+                    <td> <?=  date('d-m-Y', strtotime( $vodomer['DAT_POKAZ']))?></td>
 
 
-                    <td> <?= $vodomer['POKAZ']  ?></td>
+                    <td> <?= $vodomer['POKAZ'] ?></td>
+
 
                 </tr>
                 <?php endforeach; ?>
+
+                <?php if (empty( $vodomers)): ?>
+                    <tr>
+                        <td colspan="3" style="text-align: center"> Нет данных </td>
+                    </tr>
+                <?php endif ?>
             </table>
 
         </td>
