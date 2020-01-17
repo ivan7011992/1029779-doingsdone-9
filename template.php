@@ -1,5 +1,15 @@
 <?php
 $end = end($table3);
+$sumall = 0;
+$vsego_nachis= $end['VSEGO_NACHIS'] + $end['SUMMA_PERER'] + $table3[0]['SUM_ODN'] +  $end['SUM_POVISH'];
+$ALL  = $vsego_nachis +  $table3[0]['SALDO_PRED'] -  $table3[0]['SUMMA_OPLAT'];
+if ($ALL > 0){
+    $ALL  = $vsego_nachis +  $table3[0]['SALDO_PRED'] -  $table3[0]['SUMMA_OPLAT'];
+    }else{
+    $ALL = 0;
+}
+$ALL1 = $ALL;
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,14 +35,6 @@ $end = end($table3);
             word-spacing: 4px;
         }
 
-        .table1 {
-            border-style: solid;
-            border-color: black;
-            width: 83%;
-            height: 280px;
-            margin-top: 0px;
-            border-width: 1px;
-        }
 
 
         table {
@@ -69,14 +71,6 @@ $end = end($table3);
         }
 
 
-
-        .list {
-            /*float: left;*/
-            /*margin: 0 -18px;*/
-            /*line-height: 0.6;*/
-
-        }
-
         li {
             list-style-type: none;
         }
@@ -90,41 +84,7 @@ $end = end($table3);
             color: black;
             width: 100%;
             font-size: 9px;
-
-        }
-
-        .block1 {
-            width: 700px;
-            display: inline-block;
-            vertical-align: top;
-        }
-
-        .block2 {
-            width: 700px;
-            display: inline-block;
-        }
-
-        .table2 {
-
-            width: 92%;
-            font-size: 10px;
-
-
-        }
-
-        .caption {
-
-            text-align: left;
-        }
-
-
-        .block4 {
-            width: 352px;
-            display: inline-block;
-            /* float: right; */
-            margin-right: 302px;
-            padding: 0px;
-            float: right;
+            text-align: justify;
         }
 
         .table4 {
@@ -143,9 +103,7 @@ $end = end($table3);
         }
         .table3 th{
 
-            padding-left: 0px;
-
-
+            padding: 5px;
 
         }
 
@@ -153,7 +111,7 @@ $end = end($table3);
             border-width: 0!important;
         }
 
-        table.table3 tr td {
+        table.table3 tr td  {
             padding: 5px;
         }
 
@@ -183,7 +141,7 @@ $end = end($table3);
                 <br>
                 Площадь помещения: <?= $S ?? '' ?>
                 <br>
-                Количество проживающих: <?= $countTenants ?? '' ?> чел.
+                Количество проживающих: <?= $CountTenants ?? '' ?> чел.
                 <br>
                 Организация – исполнитель услуг: МУП Г.НОВОСИБИРСКА «ГОРВОДОКАНАЛ»
                 <br>
@@ -198,7 +156,6 @@ $end = end($table3);
                 Телефон +7(383)204-99-19; Факс +7(383)210-14-23; Email:gorvoda@mail.ru
             </p>
         </td>
-
 
         <td valign="top"
             style="padding-left: 10px">
@@ -222,15 +179,13 @@ $end = end($table3);
                         К/С 30101810500000000641
                     </td>
                     <td style="border: 1px solid black"><?= $kod ?></td>
-                    <td style="border: 1px solid black"> <?=$ALL = $end['VSEGO_NACHIS'] + $table3[0]['SUM_ODN'] +  $table3[0]['SALDO_PRED'] -  $table3[0]['SUMMA_OPLAT'] ?> </td>
+                    <td style="border: 1px solid black"> <?= $ALL1 ?> </td>
                 </tr>
                 <tr>
-                    <td colspan="4" style="border: 1px solid black">
-
+                <td colspan="4" style="border: 1px solid black">
                         <table class="no-border">
                             <tr>
                                 <td class="no-border" valign="top"> Справочно</td>
-
 
                                 <td class="no-border">
                                     <li>Задолженность за предыдущие периоды:</li>
@@ -248,22 +203,21 @@ $end = end($table3);
                                 </td>
 
                                 <td class="no-border" style="margin-left: 10px">
-                                    <li style=" margin-left: 19px"><?=$DEPT?></li>
+                                    <li style=" margin-left: 19px"><?=$DEPT ?? '' ?></li>
                                     <br>
-                                    <li style=" margin-left: 19px"><?=$OVERPAY?></li>
+                                    <li style=" margin-left: 19px"><?=$OVERPAY  ?? ''  ?></li>
                                     <br>
                                     <li style=" margin-left: 19px"><?=date('d-m-Y', strtotime($DATE))?></li>
                                     <br>
                                     <li style=" margin-left:19px"><?=$SUMMA_OPLAT?> </li>
                                     <br>
 
-                                    <li style=" margin-left: 19px"><?=$ALL = $end['VSEGO_NACHIS'] + $table3[0]['SUM_ODN'] + $end['SUM_POVISH']+ $table3[0]['SALDO_PRED']  -  $table3[0]['SUMMA_OPLAT'] ?></li>
+                                    <li style=" margin-left: 19px"><?=$ALL1  ?></li>
                                     <br>
 
                                     <li style=" margin-left: 19px"><?=$GOSP?></li>
                                     <br>
                                 </td>
-
                             </tr>
                         </table>
 
@@ -291,7 +245,6 @@ $end = end($table3);
                     <th rowspan="2"> Перерасчеты всего, руб.</th>
                     <th rowspan="2">Размер повышающего коэфициента</th>
                     <th colspan="3"> Итого к оплате за расчетный период, руб.</th>
-
 
                 </tr>
                 <tr>
@@ -324,6 +277,8 @@ $end = end($table3);
                     $ALL = $table['SUMMA_PERER']+ $table['SUM_POVISH'] + $table['SUM_ODN'] + $table['VSEGO_NACHIS'];
                     $INDIV_CONSUMPTION = $table['SUMMA_PERER'] + $table['SUM_POVISH'] + $table['VSEGO_NACHIS'] - $table['IS_POVISH_ODN'];
                     $COMMON_HOUSE_NEEDS =  $table['SUM_ODN'] +  $table['IS_POVISH_ODN'];
+
+                    $sumall += $table['SUM_POVISH'];
                 ?>
 
                 <tr style="height: 40px">
@@ -340,20 +295,14 @@ $end = end($table3);
                     <td><?=  $ALL ?></td>
                     <td><?=  $INDIV_CONSUMPTION ?></td>
                     <td><?=  $COMMON_HOUSE_NEEDS ?></td>
-
                 </tr>
-
                 <?php } ?>
-
             </table>
-
         </td>
-
 
         <td valign="top" style="padding-left: 10px;">
 
             <h3>Справочная информация</h3>
-
 
             <table class="table4" style="width: 100%">
                 <tr>
@@ -366,17 +315,11 @@ $end = end($table3);
                 </tr>
                 <?php foreach ($vodomers as $vodomer): ?>
                 <tr>
-
-
                     <td> <?= $vodomer['N_VODOMER']  ?></td>
-
 
                     <td> <?=  date('d-m-Y', strtotime( $vodomer['DAT_POKAZ']))?></td>
 
-
                     <td> <?= $vodomer['POKAZ'] ?></td>
-
-
                 </tr>
                 <?php endforeach; ?>
 
@@ -393,14 +336,14 @@ $end = end($table3);
 </table>
 <div id="footer">
     Оплата услуг за текущий месяц должна производиться до 10-го числа следующего за истекшим месяцем. Показания
-    индивидуальных приборов учета за текущий месяц, рекомендовано передавать в ресурсоснабжающую организацию до 23 числа
+    индивидуальных приборов учета за текущий месяц, рекомендовано передавать в ресурсоснабжающую организацию до 25 числа
     ТЕКУЩЕГО месяца. При отсутствии показаний расчет производится по СРЕДНЕМУ ПОТРЕБЛЕНИЮ. (Постановление правительства
     РФ от 06.05.2011 №354).
     Производить оплату за услуги холодного водоснабжения и водоотведения без взимания комиссии возможно через: кассы
     предприятия (ул. Революции,5 с пн. по пт с 8-00 до 18-00, суб. с 8-00 до 16-00.; ул.Эйхе, 13 с пн. по пт. с 9-00 до
     18-00; ул.Ветлужская, 10 с пн по пт. с 9-00 до 18-00; ул.Вертковская,1А с пн. по пт. с 8-00 до 18-00; ул.Демьяна
-    Бедного,45 с пн. по пт. с 9-00 до 18-00; д.п. Кудряшовский, ул.Октябрьская,11 с пн. по пт. с 10-00 до 19-00,суб. с
-    9-00 до 16-00; г.Обь, ул.Шевченко,1А с пн. по пт. с 8-00 до 17-00); личный кабинет на сайте МУП г.Новосибирска
+    Бедного,45 с пн. по пт. с 9-00 до 18-00; д.п. Кудряшовский, ул.Октябрьская,11 с пн. по пт. с 09-00 до 18-00(обед с 13.00 до 14.00),
+    суб.с 9-00 до 16-00; г.Обь, ул.Шевченко,1А с пн. по пт. с 8-00 до 17-00); личный кабинет на сайте МУП г.Новосибирска
     «ГОРВОДОКАНАЛ» (www.gorvodokanal.com); в организациях, в том числе через личные кабинеты, согласно списку,
     размещенному на сайте МУП г.Новосибирска «ГОРВОДОКАНАЛ» (www.gorvodokanal.com) в разделе «Информация для абонентов»
 
